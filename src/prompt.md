@@ -57,35 +57,42 @@
 - 注释应通过增加说明，提高代码的可读性，而非说明代码为什么不好，要重视其原有逻辑，增加解释说明。
 - 注释要简洁，避免长篇解释。
 
-如果代码不是低分代码，不要输出带注释代码，只写 `No NOTE annotation needed.`。
+如果代码不是低分代码，`annotated_code` 字段必须是空字符串。
 
 ## 输出格式
 
-请严格按以下 Markdown 格式输出：
+最终回答必须是 JSONL 格式。因为当前只评审一段代码，所以你只能输出一行 JSON 对象。
 
-````markdown
-## Record {{INDEX}} - {{CATEGORY}}
+强制要求：
 
-### Scores
+- 你的完整回答只能包含一行 JSON。
+- 不要输出 Markdown 标题。
+- 不要输出 Markdown 表格。
+- 不要输出代码块围栏。
+- 不要输出任何 JSON 之外的解释文字。
+- JSON 必须能被 Python 的 `json.loads(line)` 直接解析。
+- 所有字段名必须使用双引号。
+- 所有字符串值必须使用双引号。
+- 字符串内部的换行必须转义为 `\n`，不能出现真实换行。
+- `score` 必须是整数。
+- `low_score` 必须是布尔值 `true` 或 `false`。
+- `findings` 必须是数组；没有发现时使用空数组 `[]`。
+- `annotated_code` 必须是字符串；低分时放入只添加 NOTE 注释后的完整代码，非低分时放空字符串 `""`。
 
-| Dimension | Score | Rating | Severity | Reason |
-| --- | ---: | --- | --- | --- |
-| Reliability | <0-100> | <rating> | <severity> | <reason> |
-| Maintainability | <0-100> | <rating> | <severity> | <reason> |
+字段结构必须如下：
 
-### Overall
+- `reliability`：对象，包含 `score`、`rating`、`severity`、`reason`。
+- `maintainability`：对象，包含 `score`、`rating`、`severity`、`reason`。
+- `overall`：对象，包含 `score`、`rating`、`low_score`。
+- `findings`：数组，每个元素是对象，包含 `severity`、`message`。
+- `annotated_code`：字符串。
 
-- Score: <0-100>
-- Rating: <rating>
-- Low score: <Yes/No>
+枚举值限制：
 
-### Findings
+- `rating` 只能是 `"Excellent"`、`"Good"`、`"Fair"`、`"Needs Improvement"`。
+- `severity` 只能是 `"None"`、`"Note"`、`"Warning"`、`"Error"`。
+- `findings[*].severity` 只能是 `"Note"`、`"Warning"`、`"Error"`。
 
-- <severity>: <short finding>
+输出示例结构如下；实际输出时不要照抄示例内容：
 
-### Annotated Code
-
-```c
-<如果低分，在这里输出只添加 NOTE 注释后的原始 Code To Review；如果不是低分，输出 No NOTE annotation needed.>
-```
-````
+{"reliability":{"score":85,"rating":"Good","severity":"Note","reason":"代码整体可运行，仅有少量边界条件说明不足。"},"maintainability":{"score":72,"rating":"Good","severity":"Note","reason":"代码结构基本清晰，但命名和局部逻辑仍可读性有限。"},"overall":{"score":79,"rating":"Good","low_score":false},"findings":[{"severity":"Note","message":"部分参数含义不够直观。"}],"annotated_code":""}

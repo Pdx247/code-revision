@@ -34,17 +34,17 @@ model = ChatOpenAI(
     base_url= SILICONFLOW_BASE_URL
 )
 
-dataset_size = 10
+dataset_size = 100
 now = datetime.datetime.now()
 
-for i in range(10):
+for i in range(dataset_size):
     awful_code = awful_codes[i]
     prompt = prompt_template.replace("{{CRITERION}}", criterion).replace("{{SOURCE_CODE}}", awful_code)
     # print(prompt)
     response = model.invoke(prompt)
     time = now.strftime("%Y-%m-%d %H:%M:%S")
     print(f"[{time}]   {i+1}/{dataset_size}")
-    with open(OUTPUT_RESPONSE_PATH + "/deepseek-out-v1.md", 'a', encoding = 'utf-8') as f:
-        f.write(response.content + "\n\n")
+    with open(OUTPUT_RESPONSE_PATH + "/deepseek-out-v1.jsonl", 'a', encoding = 'utf-8') as f:
+        f.write(response.content + "\n")
 
 

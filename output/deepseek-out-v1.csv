@@ -1,0 +1,4233 @@
+,source,comment
+0,"/*
+* Function: GenerateNtPasswordHashHash
+* Purpose: Computes an NT password hash using MD4 algorithm from two input parameters.
+*/
+void GenerateNtPasswordHashHash(long param_1,long param_2)
+{
+  if ((param_1 != 0) && (param_2 != 0)) {
+    HashMd4(param_1,param_2,0x10);
+    return;
+  }
+  return;
+}","/*
+* Function: GenerateNtPasswordHashHash
+* Purpose: Computes an NT password hash using MD4 algorithm from two input parameters.
+* NOTE: 函数名暗示生成双重哈希，但实际仅调用一次MD4。
+* NOTE: param_1 和 param_2 的具体含义（如输入数据指针和输出缓冲区指针）不明确。
+*/
+void GenerateNtPasswordHashHash(long param_1,long param_2)
+{
+  if ((param_1 != 0) && (param_2 != 0)) {
+    // NOTE: 调用MD4哈希函数，第三个参数0x10可能表示输出长度（16字节）。
+    HashMd4(param_1,param_2,0x10);
+    return;
+  }
+  // NOTE: 当任一输入参数为0时，函数无操作返回，这可能表示错误情况未被处理。
+  return;
+}"
+1,"/*
+* Function: GenerateNtPasswordHashHash
+* Purpose: Computes an NT password hash using MD4 algorithm from two input parameters values.
+*/
+void GenerateNtPasswordHashHash(long param_1,long param_2)
+{
+  if ((param_1 != 0) && (param_2 != 0)) {
+    HashMd4(param_1,param_2,0x10);
+  }
+  return;
+}","/*
+* Function: GenerateNtPasswordHashHash
+* Purpose: Computes an NT password hash using MD4 algorithm from two input parameters values.
+* NOTE: 函数假设调用者已确保 param_1 和 param_2 指向有效内存，且 param_2 缓冲区大小至少为 0x10 字节。
+* NOTE: 参数 param_1 可能指向密码明文输入，param_2 可能指向用于存储哈希结果的输出缓冲区。
+*/
+void GenerateNtPasswordHashHash(long param_1,long param_2)
+{
+  if ((param_1 != 0) && (param_2 != 0)) { // NOTE: 仅进行非空检查，未验证指针指向的内存是否可读写。
+    HashMd4(param_1,param_2,0x10); // NOTE: 调用 MD4 哈希函数，第三个参数 0x10 表示输出哈希长度为 16 字节。
+  }
+  return;
+}"
+2,"/*
+* Function: hp3800_fixedpwm
+* Purpose: Determines a fixed PWM value based on a condition involving a control parameter.
+*/
+byte hp3800_fixedpwm(undefined8 param_1,uint param_2)
+{
+  return ~-(param_2 < 2) & 0x16;
+}","/*
+* Function: hp3800_fixedpwm
+* Purpose: Determines a fixed PWM value based on a condition involving a control parameter.
+*/
+byte hp3800_fixedpwm(undefined8 param_1,uint param_2)
+{
+  // NOTE: 表达式 ~-(param_2 < 2) 等价于 (param_2 < 2) ? 0xffffffff : 0，然后与0x16进行按位与。
+  return ~-(param_2 < 2) & 0x16;
+}"
+3,"/*
+* Function: hp3800_fixedpwm
+* Purpose: Computes a fixed PWM value based on a condition and bitmask.
+*/
+byte hp3800_fixedpwm(undefined8 param_1,uint param_2)
+{
+  return ~-(param_2 < 2) & 0x16;
+}","/*
+* Function: hp3800_fixedpwm
+* Purpose: Computes a fixed PWM value based on a condition and bitmask.
+*/
+byte hp3800_fixedpwm(undefined8 param_1,uint param_2)
+{
+  // NOTE: 表达式 ~-(param_2 < 2) 在 param_2 < 2 时为 ~-1 (即 0)，否则为 ~-0 (即 -1)。
+  // NOTE: 与 0x16 (十进制22) 进行按位与，最终返回 0 或 22。
+  return ~-(param_2 < 2) & 0x16;
+}"
+4,"/*
+* Function: hp3800_fixedpwm
+* Purpose: Determines a fixed PWM value based on input parameters and stack canary validation.
+*/
+undefined8 hp3800_fixedpwm(undefined8 param_1,int param_2)
+{
+  undefined8 uVar1;
+  long in_FS_OFFSET;
+  
+  if (param_2 == 1) {
+    uVar1 = 0;
+  }
+  else {
+    uVar1 = 0x16;
+    if (param_2 == 0) {
+      uVar1 = 0;
+    }
+  }
+  if (*(long *)(in_FS_OFFSET + 0x28) == *(long *)(in_FS_OFFSET + 0x28)) {
+    return uVar1;
+  }
+                    
+  __stack_chk_fail();
+}","/*
+* Function: hp3800_fixedpwm
+* Purpose: Determines a fixed PWM value based on input parameters and stack canary validation.
+*/
+undefined8 hp3800_fixedpwm(undefined8 param_1,int param_2)
+{
+  undefined8 uVar1;
+  long in_FS_OFFSET;
+  
+  if (param_2 == 1) {
+    uVar1 = 0;
+  }
+  else {
+    uVar1 = 0x16; // NOTE: 当param_2不等于1时，默认设置uVar1为0x16。
+    if (param_2 == 0) {
+      uVar1 = 0; // NOTE: 如果param_2等于0，则覆盖默认值，将uVar1设为0。
+    }
+  }
+  if (*(long *)(in_FS_OFFSET + 0x28) == *(long *)(in_FS_OFFSET + 0x28)) { // NOTE: 栈保护检查，验证canary值是否被修改。
+    return uVar1;
+  }
+                    
+  __stack_chk_fail(); // NOTE: 如果栈保护检查失败，则调用栈保护失败处理函数。
+}
+"
+5,"/*
+* Function: GenerateNtPasswordHashHash
+* Purpose: Computes an NT password hash using MD4 algorithm based on two input parameters.
+*/
+void GenerateNtPasswordHashHash(long param_1,long param_2)
+{
+  if ((param_1 != 0) && (param_2 != 0)) {
+    HashMd4(param_1,param_2,0x10);
+    return;
+  }
+  return;
+}","/*
+* Function: GenerateNtPasswordHashHash
+* Purpose: Computes an NT password hash using MD4 algorithm based on two input parameters.
+* NOTE: 函数名和参数名（param_1, param_2）含义模糊，难以理解其具体作用。
+* NOTE: 函数缺少对输入参数有效性的详细检查，例如检查指针是否指向有效内存。
+*/
+void GenerateNtPasswordHashHash(long param_1,long param_2)
+{
+  /* NOTE: 条件判断确保两个输入参数均不为零，但未说明零值代表的具体含义（如空指针）。 */
+  if ((param_1 != 0) && (param_2 != 0)) {
+    /* NOTE: 调用 HashMd4 函数，第三个参数 0x10 是硬编码的哈希长度，缺乏解释。 */
+    HashMd4(param_1,param_2,0x10);
+    return;
+  }
+  /* NOTE: 当任一参数为零时，函数直接返回，未执行任何操作或设置错误状态。 */
+  return;
+}"
+6,"/*
+* Function: GenerateNtPasswordHashHash
+* Purpose: Computes an NT password hash using MD4 algorithm from two input parameters.
+*/
+void GenerateNtPasswordHashHash(long param_1,long param_2)
+{
+  if ((param_1 != 0) && (param_2 != 0)) {
+    HashMd4(param_1,param_2,0x10);
+    return;
+  }
+  return;
+}","/*
+* Function: GenerateNtPasswordHashHash
+* Purpose: Computes an NT password hash using MD4 algorithm from two input parameters.
+* NOTE: 函数假设param_1和param_2指向有效缓冲区，但未验证其长度。
+* NOTE: 常量0x10（16）表示输出哈希的长度（字节）。
+*/
+void GenerateNtPasswordHashHash(long param_1,long param_2)
+{
+  if ((param_1 != 0) && (param_2 != 0)) {
+    HashMd4(param_1,param_2,0x10); // NOTE: 调用MD4哈希函数，第三个参数是输出缓冲区大小。
+    return;
+  }
+  return; // NOTE: 当任一输入指针为空时，函数无操作直接返回。
+}
+"
+7,"/*
+* Function: ioabs_tcp_pre_select
+* Purpose: Prepares TCP I/O state for polling by updating file descriptor flags and computing a readiness metric.
+*/
+ulong ioabs_tcp_pre_select(int *param_1,int *param_2,long param_3)
+
+{
+  uint *puVar1;
+  int iVar2;
+  int *piVar3;
+  int iVar4;
+  uint uVar5;
+  
+  iVar2 = *param_2;
+  *param_1 = iVar2;
+  *param_2 = iVar2 + 1;
+  puVar1 = (uint *)(param_3 + (long)*param_1 * 8);
+  piVar3 = *(int **)(param_1 + 2);
+  iVar2 = piVar3[1];
+  puVar1[1] = param_1[4];
+  iVar4 = (*piVar3 + iVar2) - piVar3[2];
+  uVar5 = *puVar1 | 5;
+  if (iVar4 % iVar2 == 0) {
+    uVar5 = *puVar1 | 1;
+  }
+  *puVar1 = uVar5;
+  return (long)iVar4 / (long)iVar2 & 0xffffffff;
+}","/*
+* Function: ioabs_tcp_pre_select
+* Purpose: Prepares TCP I/O state for polling by updating file descriptor flags and computing a readiness metric.
+*/
+ulong ioabs_tcp_pre_select(int *param_1,int *param_2,long param_3)
+
+{
+  uint *puVar1;
+  int iVar2;
+  int *piVar3;
+  int iVar4;
+  uint uVar5;
+  
+  iVar2 = *param_2;
+  *param_1 = iVar2; /* NOTE: 将param_2指向的值赋给param_1指向的位置，可能用于索引计算。 */
+  *param_2 = iVar2 + 1; /* NOTE: 递增param_2指向的值，可能用于下一个索引。 */
+  puVar1 = (uint *)(param_3 + (long)*param_1 * 8); /* NOTE: 基于param_3基址和索引计算偏移，步长为8字节。 */
+  piVar3 = *(int **)(param_1 + 2); /* NOTE: 从param_1偏移2个int位置处读取一个int指针。 */
+  iVar2 = piVar3[1]; /* NOTE: 获取piVar3指向数组的第二个元素。 */
+  puVar1[1] = param_1[4]; /* NOTE: 将param_1偏移4个int位置的值存储到puVar1偏移1个uint位置。 */
+  iVar4 = (*piVar3 + iVar2) - piVar3[2]; /* NOTE: 计算一个差值，可能涉及缓冲区读写指针。 */
+  uVar5 = *puVar1 | 5; /* NOTE: 将puVar1指向的值与5（二进制101）进行按位或操作。 */
+  if (iVar4 % iVar2 == 0) { /* NOTE: 检查差值是否能被iVar2整除。注意iVar2可能为0导致除零错误。 */
+    uVar5 = *puVar1 | 1; /* NOTE: 如果能整除，则改为与1（二进制001）进行按位或。 */
+  }
+  *puVar1 = uVar5; /* NOTE: 将计算后的标志位写回原内存位置。 */
+  return (long)iVar4 / (long)iVar2 & 0xffffffff; /* NOTE: 返回iVar4除以iVar2的商，并截断为32位。存在除零风险。 */
+}"
+8,"/*
+* Function: hp3800_fixedpwm
+* Purpose: Maps a USB parameter and scan type to a predefined PWM value using a hardcoded lookup table stored in memory.
+*/
+undefined4 hp3800_fixedpwm(int param_1,int param_2)
+
+{
+  long in_FS_OFFSET;
+  int local_4c;
+  int local_40;
+  undefined4 local_3c;
+  undefined8 local_38;
+  undefined8 local_30;
+  undefined8 local_28;
+  undefined8 local_20;
+  long local_10;
+  
+  local_10 = *(long *)(in_FS_OFFSET + 0x28);
+  local_30 = 0;
+  local_28 = 0;
+  local_20 = 0;
+  local_38 = 1;
+  local_3c = 0x16;
+  local_40 = 0;
+  do {
+    if (1 < local_40) {
+LAB_001000aa:
+      if (*(long *)(in_FS_OFFSET + 0x28) != *(long *)(in_FS_OFFSET + 0x28)) {
+                    
+        __stack_chk_fail();
+      }
+      return local_3c;
+    }
+    if (param_2 == *(int *)(&local_38 + (long)local_40 * 2)) {
+      if ((param_1 < 1) || (local_4c = param_1, 3 < param_1)) {
+        local_4c = 1;
+      }
+      local_3c = *(undefined4 *)
+                  ((long)&local_38 + ((long)(local_4c + -1) + (long)local_40 * 4) * 4 + 4);
+      goto LAB_001000aa;
+    }
+    local_40 = local_40 + 1;
+  } while( true );
+}","/*
+* Function: hp3800_fixedpwm
+* Purpose: Maps a USB parameter and scan type to a predefined PWM value using a hardcoded lookup table stored in memory.
+*/
+undefined4 hp3800_fixedpwm(int param_1,int param_2)
+
+{
+  long in_FS_OFFSET;
+  int local_4c;
+  int local_40;
+  undefined4 local_3c;
+  undefined8 local_38;
+  undefined8 local_30;
+  undefined8 local_28;
+  undefined8 local_20;
+  long local_10;
+  
+  local_10 = *(long *)(in_FS_OFFSET + 0x28); /* NOTE: 栈保护金丝雀值初始化。 */
+  local_30 = 0;
+  local_28 = 0;
+  local_20 = 0;
+  local_38 = 1; /* NOTE: 硬编码查找表的起始值。 */
+  local_3c = 0x16; /* NOTE: 默认返回值。 */
+  local_40 = 0; /* NOTE: 循环索引，用于遍历查找表。 */
+  do {
+    if (1 < local_40) { /* NOTE: 检查索引是否超出硬编码表大小（2）。 */
+LAB_001000aa:
+      if (*(long *)(in_FS_OFFSET + 0x28) != *(long *)(in_FS_OFFSET + 0x28)) {
+                    /* NOTE: 栈保护检查，但可能被goto绕过。 */
+        __stack_chk_fail();
+      }
+      return local_3c;
+    }
+    if (param_2 == *(int *)(&local_38 + (long)local_40 * 2)) { /* NOTE: 比较param_2与查找表中的值。 */
+      if ((param_1 < 1) || (local_4c = param_1, 3 < param_1)) { /* NOTE: 钳制param_1到范围[1,3]。 */
+        local_4c = 1;
+      }
+      local_3c = *(undefined4 *)
+                  ((long)&local_38 + ((long)(local_4c + -1) + (long)local_40 * 4) * 4 + 4); /* NOTE: 基于param_1和local_40计算偏移并获取PWM值。 */
+      goto LAB_001000aa;
+    }
+    local_40 = local_40 + 1;
+  } while( true );
+}"
+9,"/*
+* Function: ioabs_tcp_pre_select
+* Purpose: Prepares a TCP connection for polling by updating status flags in a structured buffer.
+*/
+ulong ioabs_tcp_pre_select(int *param_1,int *param_2,long param_3)
+
+{
+  uint *puVar1;
+  int iVar2;
+  int *piVar3;
+  int iVar4;
+  ulong uVar5;
+  
+  iVar2 = *param_2;
+  *param_1 = iVar2;
+  *param_2 = iVar2 + 1;
+  *(int *)(param_3 + 4 + (long)*param_1 * 8) = param_1[4];
+  puVar1 = (uint *)(param_3 + (long)*param_1 * 8);
+  *puVar1 = *puVar1 | 1;
+  piVar3 = *(int **)(param_1 + 2);
+  iVar2 = piVar3[1];
+  iVar4 = (iVar2 + *piVar3) - piVar3[2];
+  uVar5 = (long)iVar4 / (long)iVar2 & 0xffffffff;
+  if (iVar4 % iVar2 != 0) {
+    uVar5 = (ulong)*param_1;
+    puVar1 = (uint *)(param_3 + uVar5 * 8);
+    *puVar1 = *puVar1 | 4;
+  }
+  return uVar5;
+}","/*
+* Function: ioabs_tcp_pre_select
+* Purpose: Prepares a TCP connection for polling by updating status flags in a structured buffer.
+*/
+ulong ioabs_tcp_pre_select(int *param_1,int *param_2,long param_3)
+
+{
+  uint *puVar1;
+  int iVar2;
+  int *piVar3;
+  int iVar4;
+  ulong uVar5;
+  
+  iVar2 = *param_2;
+  *param_1 = iVar2;
+  *param_2 = iVar2 + 1; // NOTE: 递增 param_2 指向的值，可能用于索引或计数。
+  *(int *)(param_3 + 4 + (long)*param_1 * 8) = param_1[4]; // NOTE: 将 param_1[4] 的值存入 param_3 数组的某个偏移位置。
+  puVar1 = (uint *)(param_3 + (long)*param_1 * 8);
+  *puVar1 = *puVar1 | 1; // NOTE: 设置 param_3 数组中某个元素的最低有效位（可能表示就绪状态）。
+  piVar3 = *(int **)(param_1 + 2); // NOTE: param_1[2] 是一个指向整数数组的指针。
+  iVar2 = piVar3[1]; // NOTE: 获取数组的第二个元素（可能表示缓冲区大小或块大小）。
+  iVar4 = (iVar2 + *piVar3) - piVar3[2]; // NOTE: 计算某个缓冲区相关的差值（如已用空间）。
+  uVar5 = (long)iVar4 / (long)iVar2 & 0xffffffff; // NOTE: 计算差值相对于块大小的整数商。
+  if (iVar4 % iVar2 != 0) { // NOTE: 检查是否有余数（即缓冲区未完全填满一个块）。
+    uVar5 = (ulong)*param_1;
+    puVar1 = (uint *)(param_3 + uVar5 * 8);
+    *puVar1 = *puVar1 | 4; // NOTE: 如果存在余数，设置 param_3 数组中对应元素的第3位（可能表示部分数据就绪）。
+  }
+  return uVar5; // NOTE: 返回计算出的商，或者在有余数的情况下返回原始的索引值。
+}
+"
+10,"/*
+* Function: ioabs_tcp_pre_select
+* Purpose: Performs pre-selection operations for TCP connection state management by modifying
+*/
+void ioabs_tcp_pre_select(int *param_1,int *param_2,long param_3)
+{
+  *param_1 = *param_2;
+  *param_2 = *param_2 + 1;
+  *(int *)((long)*param_1 * 8 + param_3 + 4) = param_1[4];
+  *(uint *)(param_3 + (long)*param_1 * 8) = *(uint *)(param_3 + (long)*param_1 * 8) | 1;
+  if (((**(int **)(param_1 + 2) + *(int *)(*(long *)(param_1 + 2) + 4)) -
+      *(int *)(*(long *)(param_1 + 2) + 8)) % *(int *)(*(long *)(param_1 + 2) + 4) != 0) {
+    *(uint *)(param_3 + (long)*param_1 * 8) = *(uint *)(param_3 + (long)*param_1 * 8) | 4;
+  }
+  return;
+}","/*
+* Function: ioabs_tcp_pre_select
+* Purpose: Performs pre-selection operations for TCP connection state management by modifying
+*/
+void ioabs_tcp_pre_select(int *param_1,int *param_2,long param_3)
+{
+  *param_1 = *param_2; // NOTE: 将param_2指向的值赋给param_1指向的位置。
+  *param_2 = *param_2 + 1; // NOTE: 递增param_2指向的值。
+  *(int *)((long)*param_1 * 8 + param_3 + 4) = param_1[4]; // NOTE: 以param_1的值为索引，计算一个基于param_3的地址，并将param_1[4]的值存入该地址。
+  *(uint *)(param_3 + (long)*param_1 * 8) = *(uint *)(param_3 + (long)*param_1 * 8) | 1; // NOTE: 对同一索引计算出的另一个地址的值进行按位或操作（设置第0位）。
+  if (((**(int **)(param_1 + 2) + *(int *)(*(long *)(param_1 + 2) + 4)) -
+      *(int *)(*(long *)(param_1 + 2) + 8)) % *(int *)(*(long *)(param_1 + 2) + 4) != 0) { // NOTE: 检查一个基于param_1[2]所指向结构的复杂表达式结果是否可被整除。
+    *(uint *)(param_3 + (long)*param_1 * 8) = *(uint *)(param_3 + (long)*param_1 * 8) | 4; // NOTE: 如果上述条件成立，则对之前操作的地址值再设置第2位。
+  }
+  return;
+}"
+11,"/*
+* Function: sdstolower
+* Purpose: Converts all characters bytes values in a null-terminated string buffer to lowercase in-place.
+*/
+void sdstolower(int *param_1)
+{
+  int *piVar1;
+  int iVar2;
+  long lVar3;
+  
+  lVar3 = sdslen();
+  if (lVar3 != 0) {
+    piVar1 = param_1 + lVar3;
+    do {
+      iVar2 = tolower(*param_1);
+      *param_1 = iVar2;
+      param_1 = param_1 + 1;
+    } while (param_1 != piVar1);
+  }
+  return;
+}","/*
+* Function: sdstolower
+* Purpose: Converts all characters bytes values in a null-terminated string buffer to lowercase in-place.
+*/
+void sdstolower(int *param_1)
+{
+  int *piVar1;
+  int iVar2;
+  long lVar3;
+  
+  lVar3 = sdslen(); // NOTE: 调用未定义的函数，其返回值的含义和类型不明确。
+  if (lVar3 != 0) {
+    piVar1 = param_1 + lVar3; // NOTE: 指针算术基于int类型，但lVar3是long，可能计算错误的目标地址。
+    do {
+      iVar2 = tolower(*param_1); // NOTE: 对int*解引用并调用tolower，可能不是预期的字符处理。
+      *param_1 = iVar2;
+      param_1 = param_1 + 1;
+    } while (param_1 != piVar1); // NOTE: 循环终止条件依赖于可能错误的指针计算。
+  }
+  return;
+}"
+12,"/*
+* Function: sdstolower
+* Purpose: Converts all characters in a null-terminated SDS string to lowercase in-place.
+*/
+void sdstolower(int *param_1)
+{
+  int iVar1;
+  long lVar2;
+  int *piVar3;
+  int *piVar4;
+  
+  lVar2 = sdslen();
+  if (lVar2 != 0) {
+    piVar3 = param_1;
+    do {
+      piVar4 = piVar3 + 1;
+      iVar1 = tolower(*piVar3);
+      *piVar3 = iVar1;
+      piVar3 = piVar4;
+    } while (piVar4 != param_1 + lVar2);
+  }
+  return;
+}","/*
+* Function: sdstolower
+* Purpose: Converts all characters in a null-terminated SDS string to lowercase in-place.
+*/
+void sdstolower(int *param_1)
+{
+  int iVar1;
+  long lVar2;
+  int *piVar3;
+  int *piVar4;
+  
+  lVar2 = sdslen(); /* NOTE: 调用未定义的函数sdslen，其参数和返回值不明确。 */
+  if (lVar2 != 0) {
+    piVar3 = param_1; /* NOTE: 将整数指针作为字符数组的起始地址进行迭代。 */
+    do {
+      piVar4 = piVar3 + 1; /* NOTE: 指针算术，piVar3+1移动了sizeof(int)字节。 */
+      iVar1 = tolower(*piVar3); /* NOTE: 对整数指针解引用，可能访问错误的内存区域。 */
+      *piVar3 = iVar1;
+      piVar3 = piVar4;
+    } while (piVar4 != param_1 + lVar2); /* NOTE: 循环终止条件依赖于指针算术和未定义的lVar2。 */
+  }
+  return;
+}"
+13,"/*
+* Function: sdstolower
+* Purpose: Converts all characters in a null-terminated string buffer to lowercase in-place.
+*/
+void sdstolower(int *param_1)
+{
+  int iVar1;
+  long lVar2;
+  int *piVar3;
+  int *piVar4;
+  
+  lVar2 = sdslen();
+  if (lVar2 != 0) {
+    piVar3 = param_1;
+    do {
+      piVar4 = piVar3 + 1;
+      iVar1 = tolower(*piVar3);
+      *piVar3 = iVar1;
+      piVar3 = piVar4;
+    } while (piVar4 != param_1 + lVar2);
+  }
+  return;
+}","/*
+* Function: sdstolower
+* Purpose: Converts all characters in a null-terminated string buffer to lowercase in-place.
+*/
+void sdstolower(int *param_1)
+{
+  int iVar1;
+  long lVar2;
+  int *piVar3;
+  int *piVar4;
+  
+  lVar2 = sdslen(); /* NOTE: 调用sdslen()未传递任何参数，可能依赖全局状态或导致错误。 */
+  if (lVar2 != 0) {
+    piVar3 = param_1; /* NOTE: 将int*指针赋值给piVar3，用于遍历。 */
+    do {
+      piVar4 = piVar3 + 1; /* NOTE: 指针递增，移动一个int大小的内存单元。 */
+      iVar1 = tolower(*piVar3); /* NOTE: 将int值作为字符进行小写转换，类型不匹配。 */
+      *piVar3 = iVar1; /* NOTE: 将转换后的int值写回原位置。 */
+      piVar3 = piVar4;
+    } while (piVar4 != param_1 + lVar2); /* NOTE: 循环直到指针到达param_1 + lVar2处。 */
+  }
+  return;
+}"
+14,"/*
+* Function: sdstolower
+* Purpose: Converts all characters bytes values in an SDS string to lowercase in-place.
+*/
+void sdstolower(long param_1)
+{
+  int iVar1;
+  ulong uVar2;
+  ulong local_28;
+  
+  uVar2 = sdslen(param_1);
+  for (local_28 = 0; local_28 < uVar2; local_28 = local_28 + 1) {
+    iVar1 = tolower(*(int *)(param_1 + local_28 * 4));
+    *(int *)(local_28 * 4 + param_1) = iVar1;
+  }
+  return;
+}","/*
+* Function: sdstolower
+* Purpose: Converts all characters bytes values in an SDS string to lowercase in-place.
+*/
+void sdstolower(long param_1) /* NOTE: 参数类型应为指向SDS字符串的指针，而非long。 */
+{
+  int iVar1;
+  ulong uVar2;
+  ulong local_28;
+  
+  uVar2 = sdslen(param_1); /* NOTE: 假设param_1是SDS指针，但被声明为long，可能导致错误长度计算。 */
+  for (local_28 = 0; local_28 < uVar2; local_28 = local_28 + 1) {
+    iVar1 = tolower(*(int *)(param_1 + local_28 * 4)); /* NOTE: 错误地以4字节为单位访问字符，且将char*强制转换为int*。 */
+    *(int *)(local_28 * 4 + param_1) = iVar1; /* NOTE: 同上，错误的指针运算和类型转换。 */
+  }
+  return;
+}"
+15,"/*
+* Function: main
+* Purpose: Parses a colon-separated string stored in a local buffer, convert each token to a byte, and store sequentially in a destination buffer. Then print each byte as a two-digit hexadecimal value.
+*/
+undefined8 main(void)
+
+{
+  byte bVar1;
+  int iVar2;
+  char *__nptr;
+  undefined8 *puVar3;
+  undefined *puVar4;
+  long in_FS_OFFSET;
+  undefined local_4e [6];
+  undefined8 local_48;
+  undefined8 uStack_40;
+  undefined2 local_38;
+  long local_30;
+  
+  local_30 = *(long *)(in_FS_OFFSET + 0x28);
+  local_38 = 0x35;
+  local_48 = __LC3;
+  uStack_40 = _UNK_00100128;
+  printf(""Splitting string \""%s\"" into tokens:\n"",&local_48);
+  __nptr = strtok((char *)&local_48,"":"");
+  if (__nptr != (char *)0x0) {
+    puVar4 = local_4e;
+    do {
+      iVar2 = atoi(__nptr);
+      *puVar4 = (char)iVar2;
+      __nptr = strtok((char *)0x0,"":"");
+      puVar4 = puVar4 + 1;
+    } while (__nptr != (char *)0x0);
+  }
+  puVar3 = (undefined8 *)local_4e;
+  do {
+    bVar1 = *(byte *)puVar3;
+    puVar3 = (undefined8 *)((long)puVar3 + 1);
+    printf(""%02x:"",(ulong)bVar1);
+  } while (puVar3 != &local_48);
+  putchar(10);
+  if (local_30 == *(long *)(in_FS_OFFSET + 0x28)) {
+    return 0;
+  }
+                    
+  __stack_chk_fail();
+}","/*
+* Function: main
+* Purpose: Parses a colon-separated string stored in a local buffer, convert each token to a byte, and store sequentially in a destination buffer. Then print each byte as a two-digit hexadecimal value.
+*/
+undefined8 main(void)
+
+{
+  byte bVar1;
+  int iVar2;
+  char *__nptr;
+  undefined8 *puVar3;
+  undefined *puVar4;
+  long in_FS_OFFSET;
+  undefined local_4e [6]; /* NOTE: Destination buffer for parsed bytes, size 6. */
+  undefined8 local_48;
+  undefined8 uStack_40;
+  undefined2 local_38;
+  long local_30;
+  
+  local_30 = *(long *)(in_FS_OFFSET + 0x28);
+  local_38 = 0x35;
+  local_48 = __LC3;
+  uStack_40 = _UNK_00100128;
+  printf(""Splitting string \""%s\"" into tokens:\n"",&local_48);
+  __nptr = strtok((char *)&local_48,"":""); /* NOTE: Initial call to strtok to get first token. */
+  if (__nptr != (char *)0x0) {
+    puVar4 = local_4e; /* NOTE: Pointer to the start of the destination buffer. */
+    do {
+      iVar2 = atoi(__nptr); /* NOTE: Convert token string to integer. */
+      *puVar4 = (char)iVar2; /* NOTE: Store the integer as a byte. */
+      __nptr = strtok((char *)0x0,"":""); /* NOTE: Get next token. */
+      puVar4 = puVar4 + 1; /* NOTE: Move destination pointer forward. */
+    } while (__nptr != (char *)0x0);
+  }
+  puVar3 = (undefined8 *)local_4e; /* NOTE: Pointer to iterate through stored bytes. */
+  do {
+    bVar1 = *(byte *)puVar3; /* NOTE: Read a byte from the buffer. */
+    puVar3 = (undefined8 *)((long)puVar3 + 1); /* NOTE: Increment pointer by 1 byte. */
+    printf(""%02x:"",(ulong)bVar1); /* NOTE: Print byte as two-digit hex. */
+  } while (puVar3 != &local_48); /* WARNING: Loop termination condition may be incorrect, risking buffer over-read. */
+  putchar(10);
+  if (local_30 == *(long *)(in_FS_OFFSET + 0x28)) {
+    return 0;
+  }
+                    
+  __stack_chk_fail();
+}"
+16,"/*
+* Function: gcGetPassFromUrl
+* Purpose: Extracts a password string from a URL-encoded buffer using pointer arithmetic.
+*/
+undefined8 gcGetPassFromUrl(uint *param_1)
+{
+  int *piVar1;
+  int iVar2;
+  
+  piVar1 = (int *)(*(long *)(param_1 + 2) + GC_PASS_URL_POS * 8);
+  iVar2 = *piVar1;
+  if ((iVar2 < TSDB_PASSWORD_LEN) && (0 < iVar2)) {
+    strcpy((char *)(ulong)*param_1,(char *)(ulong)(uint)piVar1[1]);
+    return 1;
+  }
+  return 0;
+}","/*
+* Function: gcGetPassFromUrl
+* Purpose: Extracts a password string from a URL-encoded buffer using pointer arithmetic.
+*/
+undefined8 gcGetPassFromUrl(uint *param_1)
+{
+  int *piVar1;
+  int iVar2;
+  
+  piVar1 = (int *)(*(long *)(param_1 + 2) + GC_PASS_URL_POS * 8); // NOTE: 计算指向密码字段的指针，GC_PASS_URL_POS是硬编码的URL位置偏移。
+  iVar2 = *piVar1; // NOTE: 获取密码长度值。
+  if ((iVar2 < TSDB_PASSWORD_LEN) && (0 < iVar2)) { // NOTE: 检查密码长度是否在有效范围内（大于0且小于最大长度）。
+    strcpy((char *)(ulong)*param_1,(char *)(ulong)(uint)piVar1[1]); // NOTE: 将密码字符串复制到目标缓冲区，存在缓冲区溢出风险。
+    return 1;
+  }
+  return 0;
+}"
+17,"/*
+* Function: gcGetPassFromUrl
+* Purpose: Extracts a password string from a URL-encoded buffer using offset-based pointer arithmetic.
+*/
+undefined8 gcGetPassFromUrl(uint *param_1)
+{
+  long *plVar1;
+  undefined8 uVar2;
+  
+  plVar1 = (long *)(param_1 + 2);
+  if ((*(int *)(*plVar1 + GC_PASS_URL_POS * 8) < TSDB_PASSWORD_LEN) &&
+     (0 < *(int *)(*plVar1 + GC_PASS_URL_POS * 8))) {
+    strcpy((char *)(ulong)*param_1,(char *)(ulong)*(uint *)(*plVar1 + GC_PASS_URL_POS * 8 + 4));
+    uVar2 = 1;
+  }
+  else {
+    uVar2 = 0;
+  }
+  return uVar2;
+}","/*
+* Function: gcGetPassFromUrl
+* Purpose: Extracts a password string from a URL-encoded buffer using offset-based pointer arithmetic.
+*/
+undefined8 gcGetPassFromUrl(uint *param_1)
+{
+  long *plVar1;
+  undefined8 uVar2;
+  
+  plVar1 = (long *)(param_1 + 2); // NOTE: plVar1 points to param_1[2], likely a pointer to a structure.
+  if ((*(int *)(*plVar1 + GC_PASS_URL_POS * 8) < TSDB_PASSWORD_LEN) && // NOTE: Checks if a length field at offset GC_PASS_URL_POS is valid.
+     (0 < *(int *)(*plVar1 + GC_PASS_URL_POS * 8))) {
+    strcpy((char *)(ulong)*param_1,(char *)(ulong)*(uint *)(*plVar1 + GC_PASS_URL_POS * 8 + 4)); // NOTE: Copies password string from source offset to destination buffer.
+    uVar2 = 1; // NOTE: Returns 1 on success.
+  }
+  else {
+    uVar2 = 0; // NOTE: Returns 0 on failure (invalid length).
+  }
+  return uVar2;
+}"
+18,"/*
+* Function: main
+* Purpose: Extracts hexadecimal tokens values from a colon-separated string stored in a local buffer,
+*/
+undefined8 main(void)
+
+{
+  byte bVar1;
+  int iVar2;
+  char *__nptr;
+  undefined8 *puVar3;
+  undefined *puVar4;
+  long in_FS_OFFSET;
+  undefined local_4e [6];
+  undefined8 local_48;
+  undefined8 uStack_40;
+  undefined2 local_38;
+  long local_30;
+  
+  local_30 = *(long *)(in_FS_OFFSET + 0x28);
+  local_38 = 0x35;
+  local_48 = __OC3;
+  uStack_40 = _UNK_00100128;
+  printf(""Splitting string \""%s\"" into tokens:\n"",&local_48);
+  __nptr = strtok((char *)&local_48,"":"");
+  if (__nptr != (char *)0x0) {
+    puVar4 = local_4e;
+    do {
+      iVar2 = atoi(__nptr);
+      *puVar4 = (char)iVar2;
+      __nptr = strtok((char *)0x0,"":"");
+      puVar4 = puVar4 + 1;
+    } while (__nptr != (char *)0x0);
+  }
+  puVar3 = (undefined8 *)local_4e;
+  do {
+    bVar1 = *(byte *)puVar3;
+    puVar3 = (undefined8 *)((long)puVar3 + 1);
+    printf(""%02x:"",(ulong)bVar1);
+  } while (puVar3 != &local_48);
+  putchar(10);
+  if (local_30 == *(long *)(in_FS_OFFSET + 0x28)) {
+    return 0;
+  }
+                    
+  __stack_chk_fail();
+}","/*
+* Function: main
+* Purpose: Extracts hexadecimal tokens values from a colon-separated string stored in a local buffer,
+*/
+undefined8 main(void)
+
+{
+  byte bVar1;
+  int iVar2;
+  char *__nptr;
+  undefined8 *puVar3;
+  undefined *puVar4;
+  long in_FS_OFFSET;
+  undefined local_4e [6];
+  undefined8 local_48;
+  undefined8 uStack_40;
+  undefined2 local_38;
+  long local_30;
+  
+  local_30 = *(long *)(in_FS_OFFSET + 0x28);
+  local_38 = 0x35;
+  local_48 = __OC3;
+  uStack_40 = _UNK_00100128;
+  printf(""Splitting string \""%s\"" into tokens:\n"",&local_48);
+  __nptr = strtok((char *)&local_48,"":"");
+  if (__nptr != (char *)0x0) {
+    puVar4 = local_4e;
+    do {
+      iVar2 = atoi(__nptr);
+      *puVar4 = (char)iVar2;
+      __nptr = strtok((char *)0x0,"":"");
+      puVar4 = puVar4 + 1;
+    } while (__nptr != (char *)0x0);
+  }
+  puVar3 = (undefined8 *)local_4e;
+  do {
+    bVar1 = *(byte *)puVar3;
+    puVar3 = (undefined8 *)((long)puVar3 + 1);
+    printf(""%02x:"",(ulong)bVar1);
+  } while (puVar3 != &local_48); /* NOTE: 循环终止依赖于栈上变量local_48的地址，这是一种脆弱且不明确的边界检查。 */
+  putchar(10);
+  if (local_30 == *(long *)(in_FS_OFFSET + 0x28)) {
+    return 0;
+  }
+                    
+  __stack_chk_fail();
+}"
+19,"/*
+* Function: gcGetPassFromUrl
+* Purpose: Extracts a password from a URL-encoded buffer using pointer arithmetic and memory offsets.
+*/
+undefined8 gcGetPassFromUrl(uint *param_1)
+{
+  int *piVar1;
+  int iVar2;
+  
+  piVar1 = (int *)(*(long *)(param_1 + 2) + GC_PASS_URL_POS * 8);
+  iVar2 = *piVar1;
+  if ((iVar2 < TSDB_PASSWORD_LEN) && (0 < iVar2)) {
+    strcpy((char *)(ulong)*param_1,(char *)(ulong)(uint)piVar1[1]);
+    return 1;
+  }
+  return 0;
+}","/*
+* Function: gcGetPassFromUrl
+* Purpose: Extracts a password from a URL-encoded buffer using pointer arithmetic and memory offsets.
+*/
+undefined8 gcGetPassFromUrl(uint *param_1)
+{
+  int *piVar1;
+  int iVar2;
+  
+  piVar1 = (int *)(*(long *)(param_1 + 2) + GC_PASS_URL_POS * 8); /* NOTE: 计算密码字段在缓冲区中的位置，使用硬编码偏移。 */
+  iVar2 = *piVar1; /* NOTE: 获取密码长度值。 */
+  if ((iVar2 < TSDB_PASSWORD_LEN) && (0 < iVar2)) { /* NOTE: 检查密码长度是否在有效范围内。 */
+    strcpy((char *)(ulong)*param_1,(char *)(ulong)(uint)piVar1[1]); /* NOTE: 将密码复制到目标缓冲区，存在溢出风险。 */
+    return 1;
+  }
+  return 0;
+}"
+20,"/*
+* Function: tcg_out_qemu_st
+* Purpose: Generates machine code for a QEMU store operation based on size indicator (param_3).
+*/
+void tcg_out_qemu_st(undefined8 param_1,undefined4 *param_2,int param_3)
+{
+  undefined4 uVar1;
+  undefined4 uVar2;
+  
+  uVar1 = *param_2;
+  uVar2 = param_2[1];
+  if (param_3 == 3) {
+    tcg_out_ldst_asi(param_1,uVar1,uVar2,0,0xc0f00000,0x88);
+    return;
+  }
+  if (param_3 < 4) {
+    if (param_3 == 2) {
+      tcg_out_ldst_asi(param_1,uVar1,uVar2,0,0xc0a00000,0x88);
+      return;
+    }
+    if (param_3 < 3) {
+      if (param_3 == 0) {
+        tcg_out_ldst(param_1,uVar1,uVar2,0,0xc0280000);
+        return;
+      }
+      if (param_3 == 1) {
+        tcg_out_ldst_asi(param_1,uVar1,uVar2,0,0xc0b00000,0x88);
+        return;
+      }
+    }
+  }
+  tcg_abort();
+  return;
+}","/*
+* Function: tcg_out_qemu_st
+* Purpose: Generates machine code for a QEMU store operation based on size indicator (param_3).
+*/
+void tcg_out_qemu_st(undefined8 param_1,undefined4 *param_2,int param_3)
+{
+  undefined4 uVar1;
+  undefined4 uVar2;
+  
+  uVar1 = *param_2; // NOTE: Loads the first element of param_2 (likely an address) into uVar1.
+  uVar2 = param_2[1]; // NOTE: Loads the second element of param_2 (likely a value) into uVar2.
+  if (param_3 == 3) { // NOTE: Handles the case for a specific size (e.g., 32-bit?).
+    tcg_out_ldst_asi(param_1,uVar1,uVar2,0,0xc0f00000,0x88);
+    return;
+  }
+  if (param_3 < 4) { // NOTE: Checks if param_3 is less than 4.
+    if (param_3 == 2) { // NOTE: Handles the case for size 2.
+      tcg_out_ldst_asi(param_1,uVar1,uVar2,0,0xc0a00000,0x88);
+      return;
+    }
+    if (param_3 < 3) { // NOTE: Checks if param_3 is less than 3.
+      if (param_3 == 0) { // NOTE: Handles the case for size 0.
+        tcg_out_ldst(param_1,uVar1,uVar2,0,0xc0280000);
+        return;
+      }
+      if (param_3 == 1) { // NOTE: Handles the case for size 1.
+        tcg_out_ldst_asi(param_1,uVar1,uVar2,0,0xc0b00000,0x88);
+        return;
+      }
+    }
+  }
+  tcg_abort(); // NOTE: Aborts if param_3 is not 0, 1, 2, or 3 (e.g., negative or >=4).
+  return;
+}"
+21,"/*
+* Function: gcGetPassFromUrl
+* Purpose: Extracts a password substring from a URL-encoded buffer using pointer arithmetic and memory offsets.
+*/
+undefined8 gcGetPassFromUrl(uint *param_1)
+{
+  int *piVar1;
+  int iVar2;
+  
+  piVar1 = (int *)(*(long *)(param_1 + 2) + GC_PASS_URL_POS * 8);
+  iVar2 = *piVar1;
+  if ((iVar2 < TSDB_PASSWORD_LEN) && (0 < iVar2)) {
+    strcpy((char *)(ulong)*param_1,(char *)(ulong)(uint)piVar1[1]);
+    return 1;
+  }
+  return 0;
+}","/*
+* Function: gcGetPassFromUrl
+* Purpose: Extracts a password substring from a URL-encoded buffer using pointer arithmetic and memory offsets.
+*/
+undefined8 gcGetPassFromUrl(uint *param_1)
+{
+  int *piVar1;
+  int iVar2;
+  
+  piVar1 = (int *)(*(long *)(param_1 + 2) + GC_PASS_URL_POS * 8); // NOTE: 计算密码在缓冲区中的位置，使用硬编码偏移8字节。
+  iVar2 = *piVar1; // NOTE: 获取密码长度值。
+  if ((iVar2 < TSDB_PASSWORD_LEN) && (0 < iVar2)) { // NOTE: 检查密码长度是否在有效范围内。
+    strcpy((char *)(ulong)*param_1,(char *)(ulong)(uint)piVar1[1]); // NOTE: 复制密码字符串，存在缓冲区溢出风险。
+    return 1;
+  }
+  return 0;
+}"
+22,"/*
+* Function: nprFA
+* Purpose: Simulates a Z80-style instruction that reads two 24-bit memory values using a program counter-like pointer,
+*/
+void nprFA(uint *param_1)
+
+{
+  ulong uVar1;
+  undefined8 uVar2;
+  
+  uVar1 = *(ulong *)(param_1 + 4);
+  *(ulong *)(param_1 + 4) = uVar1 + 1;
+  uVar2 = MEMRD(uVar1 & 0xffffffff,3);
+  *(undefined8 *)(param_1 + 8) = uVar2;
+  uVar1 = *(ulong *)(param_1 + 4);
+  *(ulong *)(param_1 + 4) = uVar1 + 1;
+  uVar2 = MEMRD(uVar1 & 0xffffffff,3);
+  *(undefined8 *)(param_1 + 6) = uVar2;
+  if ((FS & *param_1) != 0) {
+    *(undefined8 *)(param_1 + 4) = *(undefined8 *)(param_1 + 2);
+  }
+  return;
+}","/*
+* Function: nprFA
+* Purpose: Simulates a Z80-style instruction that reads two 24-bit memory values using a program counter-like pointer,
+*/
+void nprFA(uint *param_1)
+
+{
+  ulong uVar1;
+  undefined8 uVar2;
+  
+  uVar1 = *(ulong *)(param_1 + 4); /* NOTE: 从 param_1 偏移 4 个 uint 大小的位置读取一个 ulong 值，可能用作地址指针。 */
+  *(ulong *)(param_1 + 4) = uVar1 + 1; /* NOTE: 将读取的地址指针加 1 后写回原处，模拟程序计数器递增。 */
+  uVar2 = MEMRD(uVar1 & 0xffffffff,3); /* NOTE: 从地址 uVar1（取低 32 位）读取 3 个字节的数据。 */
+  *(undefined8 *)(param_1 + 8) = uVar2; /* NOTE: 将读取到的数据存储到 param_1 偏移 8 个 uint 大小的位置。 */
+  uVar1 = *(ulong *)(param_1 + 4); /* NOTE: 再次读取递增后的地址指针。 */
+  *(ulong *)(param_1 + 4) = uVar1 + 1; /* NOTE: 再次将地址指针加 1。 */
+  uVar2 = MEMRD(uVar1 & 0xffffffff,3); /* NOTE: 从新的地址读取另外 3 个字节的数据。 */
+  *(undefined8 *)(param_1 + 6) = uVar2; /* NOTE: 将第二次读取的数据存储到 param_1 偏移 6 个 uint 大小的位置。 */
+  if ((FS & *param_1) != 0) { /* NOTE: 检查 FS（可能是一个标志寄存器）与 param_1 指向的第一个 uint 值的按位与结果。 */
+    *(undefined8 *)(param_1 + 4) = *(undefined8 *)(param_1 + 2); /* NOTE: 如果条件为真，则将 param_1 偏移 2 处的值复制到偏移 4 处（即修改地址指针）。 */
+  }
+  return;
+}"
+23,"/*
+* Function: nprFA
+* Purpose: Simulates a register-based instruction fetch and conditionally updates program counter
+*/
+void nprFA(uint *param_1)
+{
+  long lVar1;
+  undefined8 uVar2;
+  
+  lVar1 = *(long *)(param_1 + 4);
+  *(long *)(param_1 + 4) = lVar1 + 1;
+  uVar2 = MEMRD(lVar1,3);
+  *(undefined8 *)(param_1 + 8) = uVar2;
+  lVar1 = *(long *)(param_1 + 4);
+  *(long *)(param_1 + 4) = lVar1 + 1;
+  uVar2 = MEMRD(lVar1,3);
+  *(undefined8 *)(param_1 + 6) = uVar2;
+  if ((FS & *param_1) != 0) {
+    *(undefined8 *)(param_1 + 4) = *(undefined8 *)(param_1 + 2);
+  }
+  return;
+}","/*
+* Function: nprFA
+* Purpose: Simulates a register-based instruction fetch and conditionally updates program counter
+* NOTE: 函数名'nprFA'含义不明确，建议使用更具描述性的名称。
+* NOTE: 参数'param_1'可能是一个指向寄存器组或状态结构的指针。
+*/
+void nprFA(uint *param_1)
+{
+  long lVar1; // NOTE: 临时变量，用于存储从内存读取的地址。
+  undefined8 uVar2; // NOTE: 临时变量，用于存储从内存读取的数据。
+  
+  lVar1 = *(long *)(param_1 + 4); // NOTE: 从param_1偏移4的位置读取一个long值，可能是指令指针(PC)。
+  *(long *)(param_1 + 4) = lVar1 + 1; // NOTE: 将PC加1，模拟指令指针递增。
+  uVar2 = MEMRD(lVar1,3); // NOTE: 从地址lVar1读取3个字节的数据？参数'3'的含义不明确。
+  *(undefined8 *)(param_1 + 8) = uVar2; // NOTE: 将读取的数据存储到param_1偏移8的位置。
+  lVar1 = *(long *)(param_1 + 4); // NOTE: 再次读取更新后的PC值。
+  *(long *)(param_1 + 4) = lVar1 + 1; // NOTE: 再次将PC加1。
+  uVar2 = MEMRD(lVar1,3); // NOTE: 从新的PC地址读取数据。
+  *(undefined8 *)(param_1 + 6) = uVar2; // NOTE: 将第二次读取的数据存储到param_1偏移6的位置。
+  if ((FS & *param_1) != 0) { // NOTE: 检查条件标志(FS)与param_1指向的第一个字是否匹配。
+    *(undefined8 *)(param_1 + 4) = *(undefined8 *)(param_1 + 2); // NOTE: 如果条件为真，将PC设置为param_1偏移2处的值（可能是一个跳转目标）。
+  }
+  return;
+}"
+24,"/*
+* Function: nprFA
+* Purpose: Simulates a Z80-style instruction fetch and register update using memory-mapped pointer arithmetic.
+*/
+void nprFA(uint *param_1)
+{
+  long lVar1;
+  undefined8 uVar2;
+  
+  lVar1 = *(long *)(param_1 + 4);
+  *(long *)(param_1 + 4) = lVar1 + 1;
+  uVar2 = MEMRD(lVar1,3);
+  lVar1 = *(long *)(param_1 + 4);
+  *(undefined8 *)(param_1 + 8) = uVar2;
+  *(long *)(param_1 + 4) = lVar1 + 1;
+  uVar2 = MEMRD(lVar1,3);
+  *(undefined8 *)(param_1 + 6) = uVar2;
+  if ((FS & *param_1) != 0) {
+    *(undefined8 *)(param_1 + 4) = *(undefined8 *)(param_1 + 2);
+  }
+  return;
+}","/*
+* Function: nprFA
+* Purpose: Simulates a Z80-style instruction fetch and register update using memory-mapped pointer arithmetic.
+*/
+void nprFA(uint *param_1)
+{
+  long lVar1;
+  undefined8 uVar2;
+  
+  lVar1 = *(long *)(param_1 + 4); /* NOTE: param_1 is treated as a pointer to an array of longs; offset 4 likely points to a program counter (PC). */
+  *(long *)(param_1 + 4) = lVar1 + 1; /* NOTE: Increment PC by 1 (size of a fetched element). */
+  uVar2 = MEMRD(lVar1,3); /* NOTE: Read from memory address stored in lVar1 (old PC) with size 3 (meaning unclear). */
+  lVar1 = *(long *)(param_1 + 4); /* NOTE: Fetch the updated PC again. */
+  *(undefined8 *)(param_1 + 8) = uVar2; /* NOTE: Store fetched value at offset 8 (likely a register). */
+  *(long *)(param_1 + 4) = lVar1 + 1; /* NOTE: Increment PC again. */
+  uVar2 = MEMRD(lVar1,3); /* NOTE: Read from the second memory address (new PC). */
+  *(undefined8 *)(param_1 + 6) = uVar2; /* NOTE: Store second fetched value at offset 6 (another register). */
+  if ((FS & *param_1) != 0) { /* NOTE: Condition checks if flag FS (likely a status flag) matches bits in *param_1 (likely a flag register). */
+    *(undefined8 *)(param_1 + 4) = *(undefined8 *)(param_1 + 2); /* NOTE: If condition true, set PC (offset 4) to value at offset 2 (likely a jump target). */
+  }
+  return;
+}"
+25,"/*
+* Function: nprFA
+* Purpose: Simulates a Z80 instruction that increments a pointer, reads two memory bytes values,
+*/
+void nprFA(uint *param_1)
+{
+  long lVar1;
+  undefined8 uVar2;
+  
+  lVar1 = *(long *)(param_1 + 4);
+  *(long *)(param_1 + 4) = lVar1 + 1;
+  uVar2 = MEMRD(lVar1,3);
+  lVar1 = *(long *)(param_1 + 4);
+  *(undefined8 *)(param_1 + 8) = uVar2;
+  *(long *)(param_1 + 4) = lVar1 + 1;
+  uVar2 = MEMRD(lVar1,3);
+  *(undefined8 *)(param_1 + 6) = uVar2;
+  if ((FS & *param_1) != 0) {
+    *(undefined8 *)(param_1 + 4) = *(undefined8 *)(param_1 + 2);
+  }
+  return;
+}","/*
+* Function: nprFA
+* Purpose: Simulates a Z80 instruction that increments a pointer, reads two memory bytes values,
+* NOTE: 原始注释不完整，未说明具体是哪个指令以及完整的操作语义。
+*/
+void nprFA(uint *param_1) // NOTE: 参数名为 param_1，但类型为 uint*，后续却作为 long* 数组访问，存在类型不匹配风险。
+{
+  long lVar1; // NOTE: 临时变量，用于存储从 param_1 数组偏移处读取的 long 值。
+  undefined8 uVar2; // NOTE: 临时变量，用于存储从内存读取的 8 字节数据。
+  
+  lVar1 = *(long *)(param_1 + 4); // NOTE: 将 param_1 指针偏移 4 个 uint 单位（可能意图是 4 * sizeof(uint) 字节）处的值作为 long 读取到 lVar1。
+  *(long *)(param_1 + 4) = lVar1 + 1; // NOTE: 将 lVar1 + 1 写回 param_1 偏移 4 的位置。
+  uVar2 = MEMRD(lVar1,3); // NOTE: 调用 MEMRD 函数，以 lVar1 为地址，3 为参数（可能表示大小或类型）读取内存。
+  lVar1 = *(long *)(param_1 + 4); // NOTE: 再次从 param_1 偏移 4 的位置读取 long 值到 lVar1。
+  *(undefined8 *)(param_1 + 8) = uVar2; // NOTE: 将第一次 MEMRD 的结果 uVar2 存储到 param_1 偏移 8 的位置。
+  *(long *)(param_1 + 4) = lVar1 + 1; // NOTE: 将 lVar1 + 1 再次写回 param_1 偏移 4 的位置。
+  uVar2 = MEMRD(lVar1,3); // NOTE: 以新的 lVar1 值为地址，再次调用 MEMRD。
+  *(undefined8 *)(param_1 + 6) = uVar2; // NOTE: 将第二次 MEMRD 的结果存储到 param_1 偏移 6 的位置。
+  if ((FS & *param_1) != 0) { // NOTE: 检查全局变量 FS 与 param_1 指向的第一个 uint 值的位与结果是否非零。
+    *(undefined8 *)(param_1 + 4) = *(undefined8 *)(param_1 + 2); // NOTE: 如果条件成立，将 param_1 偏移 2 处的 8 字节值复制到偏移 4 处。
+  }
+  return;
+}"
+26,"/*
+* Function: call_6502_init
+* Purpose: Initializes the 6502 CPU registers (A, X, Y) from input parameters and invokes the 6502 emulator.
+*/
+void call_6502_init(uint *param_1,undefined4 param_2,uint param_3,uint param_4,uint param_5)
+{
+  *param_1 = param_3 & 0xff;
+  param_1[1] = param_4 & 0xff;
+  param_1[2] = param_5 & 0xff;
+  call_6502(param_1,param_2,0x3cf0);
+  return;
+}","/*
+* Function: call_6502_init
+* Purpose: Initializes the 6502 CPU registers (A, X, Y) from input parameters and invokes the 6502 emulator.
+*/
+void call_6502_init(uint *param_1,undefined4 param_2,uint param_3,uint param_4,uint param_5)
+{
+  *param_1 = param_3 & 0xff; /* NOTE: 将param_3的低8位赋值给A寄存器 */
+  param_1[1] = param_4 & 0xff; /* NOTE: 将param_4的低8位赋值给X寄存器 */
+  param_1[2] = param_5 & 0xff; /* NOTE: 将param_5的低8位赋值给Y寄存器 */
+  call_6502(param_1,param_2,0x3cf0); /* NOTE: 调用6502模拟器，0x3cf0为起始地址 */
+  return;
+}"
+27,"/*
+* Function: call_6502_init
+* Purpose: Initializes the 6502 CPU register state in a memory buffer and triggers a 6502 emulation call.
+*/
+void call_6502_init(uint *param_1,undefined8 param_2,byte param_3,byte param_4,byte param_5)
+{
+  *param_1 = (uint)param_3;
+  param_1[1] = (uint)param_4;
+  param_1[2] = (uint)param_5;
+  call_6502(param_1,param_2,0x3cf0);
+  return;
+}","/*
+* Function: call_6502_init
+* Purpose: Initializes the 6502 CPU register state in a memory buffer and triggers a 6502 emulation call.
+*/
+void call_6502_init(uint *param_1,undefined8 param_2,byte param_3,byte param_4,byte param_5)
+{
+  *param_1 = (uint)param_3; /* NOTE: 将 param_3 的值存入 param_1 指向的第一个 uint 位置。 */
+  param_1[1] = (uint)param_4; /* NOTE: 将 param_4 的值存入 param_1 数组的第二个 uint 位置。 */
+  param_1[2] = (uint)param_5; /* NOTE: 将 param_5 的值存入 param_1 数组的第三个 uint 位置。 */
+  call_6502(param_1,param_2,0x3cf0); /* NOTE: 调用 6502 模拟器，第三个参数 0x3cf0 是固定值，含义未知。 */
+  return;
+}"
+28,"/*
+* Function: call_6502_init
+* Purpose: Initializes the 6502 CPU register state in a memory buffer and invokes the 6502 emulator.
+*/
+void call_6502_init(uint *param_1,undefined8 param_2,byte param_3,byte param_4,byte param_5)
+{
+  *param_1 = (uint)param_3;
+  param_1[1] = (uint)param_4;
+  param_1[2] = (uint)param_5;
+  call_6502(param_1,param_2,0x3cf0);
+  return;
+}","/*
+* Function: call_6502_init
+* Purpose: Initializes the 6502 CPU register state in a memory buffer and invokes the 6502 emulator.
+* NOTE: 参数param_1是用于存储CPU寄存器状态的缓冲区指针。
+* NOTE: 参数param_2是传递给底层模拟器的上下文或数据指针。
+* NOTE: 参数param_3, param_4, param_5是初始化CPU寄存器的初始值。
+*/
+void call_6502_init(uint *param_1,undefined8 param_2,byte param_3,byte param_4,byte param_5)
+{
+  *param_1 = (uint)param_3; // NOTE: 将第一个字节参数存入缓冲区的第一个位置。
+  param_1[1] = (uint)param_4; // NOTE: 将第二个字节参数存入缓冲区的第二个位置。
+  param_1[2] = (uint)param_5; // NOTE: 将第三个字节参数存入缓冲区的第三个位置。
+  call_6502(param_1,param_2,0x3cf0); // NOTE: 调用6502模拟器，0x3cf0可能是起始地址或配置值。
+  return;
+}"
+29,"/*
+* Function: call_6502_init
+* Purpose: Initializes the 6502 CPU register state by storing accumulator, X, and Y values
+*/
+void call_6502_init(uint *param_1,undefined8 param_2,byte param_3,byte param_4,byte param_5)
+{
+  *param_1 = (uint)param_3;
+  param_1[1] = (uint)param_4;
+  param_1[2] = (uint)param_5;
+  call_6502(param_1,param_2,0x3cf0);
+  return;
+}","/*
+* Function: call_6502_init
+* Purpose: Initializes the 6502 CPU register state by storing accumulator, X, and Y values
+*/
+void call_6502_init(uint *param_1,undefined8 param_2,byte param_3,byte param_4,byte param_5)
+{
+  *param_1 = (uint)param_3; // NOTE: 将param_3（累加器初始值）存入param_1指向的第一个寄存器位置。
+  param_1[1] = (uint)param_4; // NOTE: 将param_4（X寄存器初始值）存入param_1指向的第二个寄存器位置。
+  param_1[2] = (uint)param_5; // NOTE: 将param_5（Y寄存器初始值）存入param_1指向的第三个寄存器位置。
+  call_6502(param_1,param_2,0x3cf0); // NOTE: 调用6502模拟器主函数，传入寄存器指针、参数param_2和起始地址0x3cf0。
+  return;
+}"
+30,"/*
+* Function: main
+* Purpose: Initializes a linked list, inserts 250 integer elements nodes(s) into it,
+*/
+undefined8 main(void)
+
+{
+  uint uVar1;
+  undefined8 uVar2;
+  int *piVar3;
+  int iVar4;
+  
+  uVar2 = _iniciar_lista();
+  system(""ls"");
+  puts(""----------Se procede a insertar elementos en lista------------\n\n"");
+  iVar4 = 0;
+  do {
+    piVar3 = (int *)malloc(4);
+    iVar4 = iVar4 + 1;
+    *piVar3 = iVar4;
+    uVar2 = insertar_en_lista(uVar2,piVar3);
+  } while (iVar4 != 0xfa);
+  uVar1 = elementos_en_lista(uVar2);
+  printf(""El numero de elementos de la lista es %d\n"",(ulong)uVar1);
+  imprimir_lista(uVar2);
+  return 0;
+}","/*
+* Function: main
+* Purpose: Initializes a linked list, inserts 250 integer elements nodes(s) into it,
+*/
+undefined8 main(void)
+
+{
+  uint uVar1;
+  undefined8 uVar2;
+  int *piVar3;
+  int iVar4;
+  
+  uVar2 = _iniciar_lista();
+  system(""ls""); // NOTE: 调用无关的系统命令，可能引入安全风险且与链表操作无关。
+  puts(""----------Se procede a insertar elementos en lista------------\n\n"");
+  iVar4 = 0;
+  do {
+    piVar3 = (int *)malloc(4); // NOTE: 分配内存但未检查是否成功。
+    iVar4 = iVar4 + 1;
+    *piVar3 = iVar4;
+    uVar2 = insertar_en_lista(uVar2,piVar3);
+  } while (iVar4 != 0xfa); // NOTE: 循环条件为iVar4不等于250(0xfa)。
+  uVar1 = elementos_en_lista(uVar2);
+  printf(""El numero de elementos de la lista es %d\n"",(ulong)uVar1);
+  imprimir_lista(uVar2);
+  return 0;
+}"
+31,"/*
+* Function: main
+* Purpose: Initializes a linked list, insertss 250 integer elementses into it, and prints its size and contents.
+*/
+undefined8 main(void)
+
+{
+  uint uVar1;
+  int *piVar2;
+  int local_1c;
+  undefined8 local_18;
+  
+  local_18 = _iniciar_lista();
+  system(""ls"");
+  puts(""----------Se procede a insertar elementosos en lista------------\n\n"");
+  for (local_1c = 0; local_1c < 0xfa; local_1c = local_1c + 1) {
+    piVar2 = (int *)malloc(4);
+    *piVar2 = local_1c + 1;
+    local_18 = insertar_en_lista(local_18,piVar2);
+  }
+  uVar1 = elementos_en_lista(local_18);
+  printf(""El numero de elementos de la lista es %d\n"",(ulong)uVar1);
+  imprimir_lista(local_18);
+  return 0;
+}","/*
+* Function: main
+* Purpose: Initializes a linked list, insertss 250 integer elementses into it, and prints its size and contents.
+* NOTE: 函数目的描述存在拼写错误。
+*/
+undefined8 main(void)
+
+{
+  uint uVar1;
+  int *piVar2;
+  int local_1c;
+  undefined8 local_18;
+  
+  local_18 = _iniciar_lista();
+  system(""ls""); // NOTE: 调用了无关的系统命令，可能引入安全风险。
+  puts(""----------Se procede a insertar elementosos en lista------------\n\n""); // NOTE: 输出信息存在拼写错误。
+  for (local_1c = 0; local_1c < 0xfa; local_1c = local_1c + 1) {
+    piVar2 = (int *)malloc(4); // NOTE: 未检查malloc返回值，分配失败将导致后续解引用错误。
+    *piVar2 = local_1c + 1;
+    local_18 = insertar_en_lista(local_18,piVar2); // NOTE: local_18变量含义不明确，可能代表链表头。
+  }
+  uVar1 = elementos_en_lista(local_18);
+  printf(""El numero de elementos de la lista es %d\n"",(ulong)uVar1);
+  imprimir_lista(local_18);
+  return 0;
+}"
+32,"/*
+* Function: InstAlloc_Init
+* Purpose: Initializes a two-element memory structure starting at param_1.
+*/
+void InstAlloc_Init(undefined4 *param_1,int param_2)
+{
+  *param_1 = 3;
+  param_1[1] = param_2 + 3U & 0xfffffffc;
+  return;
+}","/*
+* Function: InstAlloc_Init
+* Purpose: Initializes a two-element memory structure starting at param_1.
+*/
+void InstAlloc_Init(undefined4 *param_1,int param_2)
+{
+  NOTE: 将param_1指向的第一个元素设置为固定值3。
+  *param_1 = 3;
+  NOTE: 计算param_2 + 3，然后与0xfffffffc进行按位与操作，结果存入param_1[1]。
+  param_1[1] = param_2 + 3U & 0xfffffffc;
+  return;
+}"
+33,"/*
+* Function: InstAlloc_Init
+* Purpose: Initializes an InstAlloc structure in memory by setting up two consecutive fields.
+*/
+void InstAlloc_Init(undefined4 *param_1,int param_2)
+{
+  *param_1 = 3;
+  param_1[1] = param_2 + 3U & 0xfffffffc;
+  return;
+}","/*
+* Function: InstAlloc_Init
+* Purpose: Initializes an InstAlloc structure in memory by setting up two consecutive fields.
+*/
+void InstAlloc_Init(undefined4 *param_1,int param_2)
+{
+  NOTE: 假设 param_1 指向有效的内存地址，此处未进行空指针检查。
+  *param_1 = 3; // NOTE: 将第一个字段初始化为固定值 3。
+  NOTE: 计算 param_2 + 3 并对齐到 4 字节边界，但 param_2 可能为负值，加法存在溢出风险。
+  param_1[1] = param_2 + 3U & 0xfffffffc; // NOTE: 将结果存储到第二个字段。
+  return;
+}"
+34,"/*
+* Function: main
+* Purpose: Initializes a linked list, inserts 250 elements (0xFA) into it,
+*/
+undefined8 main(void)
+
+{
+  uint uVar1;
+  undefined8 uVar2;
+  int *piVar3;
+  int iVar4;
+  
+  iVar4 = 0;
+  uVar2 = _iniciar_lista();
+  system(""ls"");
+  puts(""----------Se procede a insertar elementos en lista------------\n\n"");
+  do {
+    iVar4 = iVar4 + 1;
+    piVar3 = (int *)malloc(4);
+    *piVar3 = iVar4;
+    uVar2 = insertar-enlista(uVar2,piVar3);
+  } while (iVar4 != 0xfa);
+  uVar1 = elementosenlista(uVar2);
+  printf(""El numero de elementos de la lista es %d\n"",(ulong)uVar1);
+  imprimir_lista(uVar2);
+  return 0;
+}","/*
+* Function: main
+* Purpose: Initializes a linked list, inserts 250 elements (0xFA) into it,
+* NOTE: 注释未说明函数的具体作用和参数。
+*/
+undefined8 main(void)
+
+{
+  uint uVar1;
+  undefined8 uVar2;
+  int *piVar3;
+  int iVar4;
+  
+  iVar4 = 0;
+  uVar2 = _iniciar_lista();
+  system(""ls"");
+  puts(""----------Se procede a insertar elementos en lista------------\n\n"");
+  do {
+    iVar4 = iVar4 + 1;
+    piVar3 = (int *)malloc(4); // NOTE: 未检查malloc返回值，分配失败时piVar3为NULL。
+    *piVar3 = iVar4;
+    uVar2 = insertar-enlista(uVar2,piVar3); // NOTE: 函数名'insertar-enlista'未定义，链接将失败。
+  } while (iVar4 != 0xfa);
+  uVar1 = elementosenlista(uVar2);
+  printf(""El numero de elementos de la lista es %d\n"",(ulong)uVar1);
+  imprimir_lista(uVar2);
+  return 0; // NOTE: 程序退出前未释放链表内存，存在内存泄漏。
+}"
+35,"/*
+* Function: InstAlloc_Init
+* Purpose: Initializes an InstAlloc structure in memory by setting up base values for allocation tracking.
+*/
+void InstAlloc_Init(undefined4 *param_1,int param_2)
+{
+  *param_1 = 3;
+  param_1[1] = param_2 + 3U & 0xfffffffc;
+  return;
+}","/*
+* Function: InstAlloc_Init
+* Purpose: Initializes an InstAlloc structure in memory by setting up base values for allocation tracking.
+*/
+void InstAlloc_Init(undefined4 *param_1,int param_2)
+{
+  *param_1 = 3; // NOTE: 设置结构体的第一个字段为固定值3，具体含义未知。
+  param_1[1] = param_2 + 3U & 0xfffffffc; // NOTE: 将param_2加3后与0xfffffffc进行位与操作，可能是为了对齐。
+  return;
+}"
+36,"/*
+* Function: InstAlloc_Init
+* Purpose: Initializes an InstAlloc structure in memory by setting up initial values for a control block.
+*/
+void InstAlloc_Init(undefined4 *param_1,int param_2)
+{
+  *param_1 = 3;
+  param_1[1] = param_2 + 3U & 0xfffffffc;
+  return;
+}","/*
+* Function: InstAlloc_Init
+* Purpose: Initializes an InstAlloc structure in memory by setting up initial values for a control block.
+*/
+void InstAlloc_Init(undefined4 *param_1,int param_2)
+{
+  *param_1 = 3; // NOTE: 将控制块的第一个字段初始化为固定值3。
+  param_1[1] = param_2 + 3U & 0xfffffffc; // NOTE: 计算并存储一个对齐后的值，可能用于表示大小或偏移量。
+  return;
+}"
+37,"/*
+* Function: doKill
+* Purpose: Terminates a process identified by a structured memory object by sending a SIGTERM signal.
+*/
+undefined8 doKill(ulong **param_1)
+{
+  __pid_t __pid;
+  int iVar1;
+  undefined4 extraout_var;
+  undefined8 uVar2;
+  
+  __pid = evCnt(param_1,*param_1);
+  iVar1 = SIGTERM;
+  if ((**param_1 & 0xe) == 0) {
+    iVar1 = evCnt(param_1,**param_1);
+  }
+  iVar1 = kill(__pid,iVar1);
+  uVar2 = T;
+  if (CONCAT44(extraoutvar,iVar1) != 0) {
+    uVar2 = Nil;
+  }
+  return uVar2;
+}","/*
+* Function: doKill
+* Purpose: Terminates a process identified by a structured memory object by sending a SIGTERM signal.
+*/
+undefined8 doKill(ulong **param_1)
+{
+  __pid_t __pid;
+  int iVar1;
+  undefined4 extraout_var;
+  undefined8 uVar2;
+  
+  __pid = evCnt(param_1,*param_1); /* NOTE: 获取进程ID，但evCnt函数目的不明。 */
+  iVar1 = SIGTERM; /* NOTE: 默认信号为SIGTERM。 */
+  if ((**param_1 & 0xe) == 0) { /* NOTE: 检查参数低位，条件含义不明确。 */
+    iVar1 = evCnt(param_1,**param_1); /* NOTE: 条件满足时，重新计算信号值，逻辑令人困惑。 */
+  }
+  iVar1 = kill(__pid,iVar1); /* NOTE: 发送信号给进程。 */
+  uVar2 = T; /* NOTE: 默认返回值为T。 */
+  if (CONCAT44(extraoutvar,iVar1) != 0) { /* NOTE: 检查kill函数返回值，但CONCAT44操作含义不清。 */
+    uVar2 = Nil; /* NOTE: 若kill失败，返回Nil。 */
+  }
+  return uVar2;
+}"
+38,"/*
+* Function: doKill
+* Purpose: Terminates a process identified by a nested data structure using SIGTERM or a dynamically retrieved signal.
+*/
+undefined8 doKill(ulong **param_1)
+{
+  __pid_t __pid;
+  int iVar1;
+  undefined4 extraout_var;
+  undefined8 uVar2;
+  
+  __pid = evCnt(param_1,*param_1);
+  iVar1 = SIGTERM;
+  if ((**param_1 & 0xe) == 0) {
+    iVar1 = evCnt(param_1,**param_1);
+  }
+  iVar1 = kill(__pid,iVar1);
+  uVar2 = Nil;
+  if (CONCAT44(extraoutvar,iVar1) == 0) {
+    uVar2 = T;
+  }
+  return uVar2;
+}","/*
+* Function: doKill
+* Purpose: Terminates a process identified by a nested data structure using SIGTERM or a dynamically retrieved signal.
+*/
+undefined8 doKill(ulong **param_1)
+{
+  __pid_t __pid;
+  int iVar1;
+  undefined4 extraout_var;
+  undefined8 uVar2;
+  
+  __pid = evCnt(param_1,*param_1); /* NOTE: 调用evCnt获取进程ID，但参数含义不明。 */
+  iVar1 = SIGTERM; /* NOTE: 默认信号设置为SIGTERM。 */
+  if ((**param_1 & 0xe) == 0) { /* NOTE: 条件检查param_1指向值的低4位中特定比特。 */
+    iVar1 = evCnt(param_1,**param_1); /* NOTE: 如果条件成立，再次调用evCnt，结果用作信号值，这可能是个错误。 */
+  }
+  iVar1 = kill(__pid,iVar1); /* NOTE: 向进程__pid发送信号iVar1。 */
+  uVar2 = Nil;
+  if (CONCAT44(extraoutvar,iVar1) == 0) { /* NOTE: 检查kill调用是否成功（返回0）。 */
+    uVar2 = T;
+  }
+  return uVar2; /* NOTE: 返回成功(T)或失败(Nil)状态。 */
+}
+"
+39,"/*
+* Function: doKill
+* Purpose: Terminates a process identified by a structured control block.
+*/
+undefined8 doKill(ulong **param_1)
+{
+  __pid_t __pid;
+  int iVar1;
+  undefined4 extraout_var;
+  undefined8 uVar2;
+  
+  __pid = evCnt(param_1,*param_1);
+  iVar1 = SIGTERM;
+  if ((**param_1 & 0xe) == 0) {
+    iVar1 = evCnt(param_1,**param_1);
+  }
+  iVar1 = kill(__pid,iVar1);
+  uVar2 = Nil;
+  if (CONCAT44(extraoutvar,iVar1) == 0) {
+    uVar2 = T;
+  }
+  return uVar2;
+}","/*
+* Function: doKill
+* Purpose: Terminates a process identified by a structured control block.
+*/
+undefined8 doKill(ulong **param_1)
+{
+  __pid_t __pid;
+  int iVar1;
+  undefined4 extraout_var; // NOTE: 变量声明但未初始化，后续使用可能导致未定义行为。
+  undefined8 uVar2;
+  
+  __pid = evCnt(param_1,*param_1); // NOTE: 从控制块中提取或计算进程ID。
+  iVar1 = SIGTERM; // NOTE: 默认使用SIGTERM信号。
+  if ((**param_1 & 0xe) == 0) { // NOTE: 检查控制块中的特定标志位。
+    iVar1 = evCnt(param_1,**param_1); // NOTE: 如果标志位为0，则通过evCnt计算信号值。
+  }
+  iVar1 = kill(__pid,iVar1); // NOTE: 向目标进程发送信号。
+  uVar2 = Nil; // NOTE: 默认返回Nil（可能表示失败）。
+  if (CONCAT44(extraoutvar,iVar1) == 0) { // NOTE: 检查kill函数的返回值（拼接了extraout_var和iVar1）。
+    uVar2 = T; // NOTE: 如果成功（返回0），则返回T（可能表示成功）。
+  }
+  return uVar2;
+}"
+40,"/*
+* Function: doKill
+* Purpose: Kills a process identified by a nested data structure, using a signal (default SIGTERM) derived from its flags.
+*/
+undefined8 doKill(ulong **param_1)
+{
+  __pid_t __pid;
+  int iVar1;
+  undefined4 extraout_var;
+  undefined8 uVar2;
+  
+  __pid = evCnt(param_1,*param_1);
+  iVar1 = SIGTERM;
+  if ((**param_1 & 0xe) == 0) {
+    iVar1 = evCnt(param_1,**param_1);
+  }
+  iVar1 = kill(__pid,iVar1);
+  uVar2 = Nil;
+  if (CONCAT44(extraout_var,iVar1) == 0) {
+    uVar2 = T;
+  }
+  return uVar2;
+}","/*
+* Function: doKill
+* Purpose: Kills a process identified by a nested data structure, using a signal (default SIGTERM) derived from its flags.
+*/
+undefined8 doKill(ulong **param_1)
+{
+  __pid_t __pid;
+  int iVar1;
+  undefined4 extraout_var;
+  undefined8 uVar2;
+  
+  __pid = evCnt(param_1,*param_1); /* NOTE: 调用evCnt获取进程ID，但参数含义不明确。 */
+  iVar1 = SIGTERM; /* NOTE: 默认信号设置为SIGTERM。 */
+  if ((**param_1 & 0xe) == 0) { /* NOTE: 检查param_1指向的第一个双字与0xe的位与结果。 */
+    iVar1 = evCnt(param_1,**param_1); /* NOTE: 如果条件成立，再次调用evCnt，结果用作信号值，这可能不符合kill系统调用语义。 */
+  }
+  iVar1 = kill(__pid,iVar1); /* NOTE: 尝试向进程__pid发送信号iVar1。 */
+  uVar2 = Nil;
+  if (CONCAT44(extraout_var,iVar1) == 0) { /* NOTE: 检查kill调用结果是否成功（返回0）。CONCAT44操作含义不明。 */
+    uVar2 = T; /* NOTE: 如果成功，返回值设为T。 */
+  }
+  return uVar2; /* NOTE: 返回Nil（失败）或T（成功）。 */
+}"
+41,"/*
+* Function: wpas_dbus_handler_reconnect
+* Purpose: Handles a D-Bus request to reconnect a wireless interface.
+*/
+undefined8 wpas_dbus_handler_reconnect(undefined8 param_1,long *param_2)
+{
+  undefined8 uVar1;
+  
+  if (*param_2 == WPA_INTERFACE_DISABLED) {
+    uVar1 = dbus_message_new_error
+                      (param_1,WPAS_DBUS_ERROR_IFACE_DISABLED,""This interface is disabled"");
+  }
+  else {
+    if (param_2[1] != 0) {
+      wpas_request_connection(param_2);
+    }
+    uVar1 = 0;
+  }
+  return uVar1;
+}","/*
+* Function: wpas_dbus_handler_reconnect
+* Purpose: Handles a D-Bus request to reconnect a wireless interface.
+*/
+undefined8 wpas_dbus_handler_reconnect(undefined8 param_1,long *param_2)
+{
+  undefined8 uVar1;
+  
+  if (*param_2 == WPA_INTERFACE_DISABLED) {
+    uVar1 = dbus_message_new_error
+                      (param_1,WPAS_DBUS_ERROR_IFACE_DISABLED,""This interface is disabled"");
+  }
+  else {
+    if (param_2[1] != 0) {
+      wpas_request_connection(param_2);
+    }
+    uVar1 = 0; // NOTE: 无论 wpas_request_connection 是否被调用，都返回 0。
+  }
+  return uVar1;
+}"
+42,"/*
+* Function: wpas_dbus_handler_reconnect
+* Purpose: Handles a D-Bus request to reconnect a wireless interface.
+*/
+undefined8 wpas_dbus_handler_reconnect(undefined8 param_1,long *param_2)
+{
+  undefined8 uVar1;
+  
+  if (*param_2 == WPA_INTERFACE_DISABLED) {
+    uVar1 = dbus_message_new_error
+                      (param_1,WPAS_DBUS_ERROR_IFACE_DISABLED,""This interface is disabled"");
+  }
+  else {
+    uVar1 = 0;
+    if (param_2[1] != 0) {
+      wpas_request_connection(param_2);
+      uVar1 = 0;
+    }
+  }
+  return uVar1;
+}","/*
+* Function: wpas_dbus_handler_reconnect
+* Purpose: Handles a D-Bus request to reconnect a wireless interface.
+*/
+undefined8 wpas_dbus_handler_reconnect(undefined8 param_1,long *param_2)
+{
+  undefined8 uVar1;
+  
+  if (*param_2 == WPA_INTERFACE_DISABLED) {
+    uVar1 = dbus_message_new_error
+                      (param_1,WPAS_DBUS_ERROR_IFACE_DISABLED,""This interface is disabled"");
+  }
+  else {
+    uVar1 = 0;
+    if (param_2[1] != 0) { // NOTE: 检查第二个参数是否非零，可能表示接口状态。
+      wpas_request_connection(param_2);
+      uVar1 = 0; // NOTE: 返回值始终设为0，表示成功或默认状态。
+    }
+  }
+  return uVar1;
+}"
+43,"/*
+* Function: main
+* Purpose: Simulates a C program that prints size and count information about basic types and arrays,
+*/
+undefined8 main(void)
+
+{
+  long in_FS_OFFSET;
+  undefined4 local_20;
+  undefined8 local_1c;
+  undefined4 local_14;
+  long local_10;
+  
+  local_10 = *(long *)(in_FS_OFFSET + 0x28);
+  local_20 = 0x64655a;
+  local_1c = 0x53202e412064655a;
+  local_14 = 0x776168;
+  printf(""The size of an int: %ld\n"",4);
+  printf(""The size of areas (int[]): %ld\n"",0x14);
+  printf(""The number of ints in areas: %ld\n"",5);
+  printf(""The size of a char: %ld\n"",1);
+  printf(""The size of name (char[]): %ld\n"",4);
+  printf(""The number of chars: %ld\n"",4);
+  printf(""The size of full_name (char[]): %ld\n"",0xc);
+  printf(""The number of chars: %ld\n"",0xc);
+  printf(""name=\""%s\"" and full_name=\""%s\""\n"",&local_20,&local_1c);
+  if (local_10 != *(long *)(in_FS_OFFSET + 0x28)) {
+                    
+    __stack_chk_fail();
+  }
+  return 0;
+}","/*
+* Function: main
+* Purpose: Simulates a C program that prints size and count information about basic types and arrays,
+*/
+undefined8 main(void)
+
+{
+  long in_FS_OFFSET;
+  undefined4 local_20;
+  undefined8 local_1c;
+  undefined4 local_14;
+  long local_10;
+  
+  local_10 = *(long *)(in_FS_OFFSET + 0x28);
+  local_20 = 0x64655a; // NOTE: Likely initializing part of a string in memory.
+  local_1c = 0x53202e412064655a; // NOTE: Likely initializing part of a string in memory.
+  local_14 = 0x776168; // NOTE: Likely initializing part of a string in memory.
+  printf(""The size of an int: %ld\n"",4); // NOTE: Hardcoded size value, not using sizeof.
+  printf(""The size of areas (int[]): %ld\n"",0x14); // NOTE: Hardcoded array size (20 bytes).
+  printf(""The number of ints in areas: %ld\n"",5); // NOTE: Hardcoded element count.
+  printf(""The size of a char: %ld\n"",1); // NOTE: Hardcoded size value.
+  printf(""The size of name (char[]): %ld\n"",4); // NOTE: Hardcoded array size.
+  printf(""The number of chars: %ld\n"",4); // NOTE: Hardcoded character count.
+  printf(""The size of full_name (char[]): %ld\n"",0xc); // NOTE: Hardcoded array size (12 bytes).
+  printf(""The number of chars: %ld\n"",0xc); // NOTE: Hardcoded character count.
+  printf(""name=\""%s\"" and full_name=\""%s\""\n"",&local_20,&local_1c); // NOTE: Printing strings from memory locations initialized above.
+  if (local_10 != *(long *)(in_FS_OFFSET + 0x28)) {
+                    
+    __stack_chk_fail();
+  }
+  return 0;
+}"
+44,"/*
+* Function: generate_function_attr_atring
+* Purpose: Generates a comma-separated string representation of function attributes from a symbol table entry.
+*/
+void generate_function_attr_atring(char *param_1,int *param_2)
+{
+  long *plVar1;
+  long in_FS_OFFSET;
+  int local_428;
+  int local_424;
+  char local_418 [1032];
+  long local_10;
+  
+  local_10 = *(long *)(in_FS_OFFSET + 0x28);
+  bzero(param_1,0x400);
+  for (local_428 = 0; local_428 <= *param_2; local_428 = local_428 + 1) {
+    if (local_428 != 0) {
+      strcat(param_1,"","");
+    }
+    plVar1 = (long *)((long)local_428 * 0x18 + *(long *)(param_2 + 2));
+    strcat(param_1,*(char **)(*plVar1 * 8 + TYPE_NAME));
+    bzero(local_418,0x400);
+    for (local_424 = 0; local_424 < *(int *)(plVar1 + 1); local_424 = local_424 + 1) {
+      snprintf(local_418,0x400,""[%d]"",(ulong)*(uint *)(plVar1[2] + (long)local_424 * 4));
+      strcat(param_1,local_418);
+    }
+  }
+  if (local_10 != *(long *)(in_FS_OFFSET + 0x28)) {
+                    
+    __stack_chk_fail();
+  }
+  return;
+}","/*
+* Function: generate_function_attr_atring
+* Purpose: Generates a comma-separated string representation of function attributes from a symbol table entry.
+* NOTE: 函数名拼写错误，应为'generate_function_attribute_string'。
+* NOTE: 参数param_1是输出缓冲区，param_2可能是一个包含计数和数组指针的结构。
+* NOTE: 缓冲区大小硬编码为0x400（1024）字节，但未进行边界检查。
+*/
+void generate_function_attr_atring(char *param_1,int *param_2)
+{
+  long *plVar1;
+  long in_FS_OFFSET;
+  int local_428;
+  int local_424;
+  char local_418 [1032];
+  long local_10;
+  
+  local_10 = *(long *)(in_FS_OFFSET + 0x28);
+  bzero(param_1,0x400); /* NOTE: 清空输出缓冲区，大小为1024字节。 */
+  for (local_428 = 0; local_428 <= *param_2; local_428 = local_428 + 1) { /* NOTE: 循环遍历param_2指向的数组，条件'<='可能导致多一次迭代。 */
+    if (local_428 != 0) {
+      strcat(param_1,"",""); /* NOTE: 添加逗号分隔符，可能造成缓冲区溢出。 */
+    }
+    plVar1 = (long *)((long)local_428 * 0x18 + *(long *)(param_2 + 2)); /* NOTE: 计算当前元素地址，假设每个元素大小为0x18（24）字节，param_2+2指向数组基址。 */
+    strcat(param_1,*(char **)(*plVar1 * 8 + TYPE_NAME)); /* NOTE: 从TYPE_NAME表中查找名称字符串，TYPE_NAME未定义。 */
+    bzero(local_418,0x400); /* NOTE: 清空临时缓冲区local_418。 */
+    for (local_424 = 0; local_424 < *(int *)(plVar1 + 1); local_424 = local_424 + 1) { /* NOTE: 内层循环处理当前元素的整数数组，plVar1+1指向数组长度。 */
+      snprintf(local_418,0x400,""[%d]"",(ulong)*(uint *)(plVar1[2] + (long)local_424 * 4)); /* NOTE: 格式化整数为'[值]'，plVar1[2]指向整数数组，每个元素4字节。 */
+      strcat(param_1,local_418); /* NOTE: 将格式化后的字符串追加到输出，可能造成缓冲区溢出。 */
+    }
+  }
+  if (local_10 != *(long *)(in_FS_OFFSET + 0x28)) { /* NOTE: 栈保护检查，检测到缓冲区溢出时跳转。 */
+                    
+    __stack_chk_fail(); /* NOTE: 栈保护失败处理函数。 */
+  }
+  return;
+}"
+45,"/*
+* Function: generate_function_attr_atring
+* Purpose: Constructs a string representation of attribute types and their dimensions from a symbol table entry.
+*/
+void generate_function_attr_atring(char *param_1,int *param_2)
+{
+  long lVar1;
+  long *plVar2;
+  int iVar3;
+  long lVar4;
+  long in_FS_OFFSET;
+  char local_448 [1032];
+  long local_40;
+  
+  local_40 = *(long *)(in_FS_OFFSET + 0x28);
+  bzero(param_1,0x400);
+  lVar4 = 0;
+  iVar3 = 0;
+  if (-1 < *param_2) {
+    while( true ) {
+      plVar2 = (long *)(lVar4 + *(long *)(param_2 + 2));
+      strcat(param_1,*(char **)(TYPE_NAME + *plVar2 * 8));
+      bzero(local_448,0x400);
+      if (0 < *(int *)(plVar2 + 1)) {
+        lVar1 = 0;
+        do {
+          snprintf(local_448,0x400,""[%d]"",(ulong)*(uint *)(plVar2[2] + lVar1 * 4));
+          strcat(param_1,local_448);
+          lVar1 = lVar1 + 1;
+        } while ((int)lVar1 < *(int *)(plVar2 + 1));
+      }
+      iVar3 = iVar3 + 1;
+      if (*param_2 < iVar3) break;
+      if (iVar3 != 0) {
+        strcat(param_1,"","");
+      }
+      lVar4 = lVar4 + 0x18;
+    }
+  }
+  if (local_40 == *(long *)(in_FS_OFFSET + 0x28)) {
+    return;
+  }
+                    
+  __stack_chk_fail();
+}","/*
+* Function: generate_function_attr_atring
+* Purpose: Constructs a string representation of attribute types and their dimensions from a symbol table entry.
+* NOTE: 函数名拼写错误，应为'generate_function_attr_string'。
+* NOTE: param_1是输出缓冲区，param_2指向一个包含参数数量、数组基址等信息的结构。
+* NOTE: 此函数遍历一个参数列表，将每个参数的类型名和维度信息拼接成字符串。
+* NOTE: 数据结构假设：param_2[0]是参数数量，param_2[2]指向参数数组。每个参数项大小为0x18字节。
+* NOTE: 参数项结构：偏移0为类型ID（long*），偏移8为维度数量（int*），偏移16为维度数组指针（long*）。
+* NOTE: TYPE_NAME是一个全局数组，用于将类型ID映射为类型名字符串。
+* NOTE: 存在缓冲区溢出风险，因为strcat未检查param_1的剩余空间。
+* NOTE: 栈保护变量local_40用于检测栈溢出，但其检查逻辑可能被绕过。
+*/
+void generate_function_attr_atring(char *param_1,int *param_2)
+{
+  long lVar1; /* NOTE: 循环索引，用于遍历某个参数的维度数组。 */
+  long *plVar2; /* NOTE: 指向当前正在处理的参数项的指针。 */
+  int iVar3; /* NOTE: 外层循环计数器，记录已处理的参数个数。 */
+  long lVar4; /* NOTE: 字节偏移量，用于计算当前参数项在参数数组中的地址。 */
+  long in_FS_OFFSET; /* NOTE: 栈保护偏移，用于获取栈保护金丝雀值。 */
+  char local_448 [1032]; /* NOTE: 临时缓冲区，用于格式化维度信息（如""[10]""）。 */
+  long local_40; /* NOTE: 保存栈保护金丝雀值的局部变量。 */
+  
+  local_40 = *(long *)(in_FS_OFFSET + 0x28); /* NOTE: 从线程本地存储获取栈保护金丝雀值。 */
+  bzero(param_1,0x400); /* NOTE: 清空输出缓冲区，大小为1024字节（0x400）。 */
+  lVar4 = 0; /* NOTE: 初始化参数数组的字节偏移为0。 */
+  iVar3 = 0; /* NOTE: 初始化已处理参数计数器为0。 */
+  if (-1 < *param_2) { /* NOTE: 检查参数数量是否大于等于0。 */
+    while( true ) {
+      plVar2 = (long *)(lVar4 + *(long *)(param_2 + 2)); /* NOTE: 计算当前参数项的地址：基址 + 偏移。 */
+      strcat(param_1,*(char **)(TYPE_NAME + *plVar2 * 8)); /* NOTE: 将类型ID对应的类型名追加到输出字符串。 */
+      bzero(local_448,0x400); /* NOTE: 清空临时格式化缓冲区。 */
+      if (0 < *(int *)(plVar2 + 1)) { /* NOTE: 检查当前参数的维度数量是否大于0。 */
+        lVar1 = 0; /* NOTE: 初始化维度数组索引为0。 */
+        do {
+          snprintf(local_448,0x400,""[%d]"",(ulong)*(uint *)(plVar2[2] + lVar1 * 4)); /* NOTE: 将维度值格式化为如""[10]""的字符串。 */
+          strcat(param_1,local_448); /* NOTE: 将格式化后的维度字符串追加到输出。 */
+          lVar1 = lVar1 + 1; /* NOTE: 移动到下一个维度。 */
+        } while ((int)lVar1 < *(int *)(plVar2 + 1)); /* NOTE: 循环直到处理完所有维度。 */
+      }
+      iVar3 = iVar3 + 1; /* NOTE: 增加已处理参数计数。 */
+      if (*param_2 < iVar3) break; /* NOTE: 如果已处理所有参数，则退出循环。 */
+      if (iVar3 != 0) { /* NOTE: 如果不是第一个参数，则在参数间添加逗号分隔符。 */
+        strcat(param_1,"","");
+      }
+      lVar4 = lVar4 + 0x18; /* NOTE: 将字节偏移增加24（0x18），以指向下一个参数项。 */
+    }
+  }
+  if (local_40 == *(long *)(in_FS_OFFSET + 0x28)) { /* NOTE: 检查栈保护金丝雀值是否被修改。 */
+    return;
+  }
+                    
+  __stack_chk_fail(); /* NOTE: 如果栈保护金丝雀值被破坏，则调用栈保护失败处理函数。 */
+}
+"
+46,"/*
+* Function: _cdio_read
+* Purpose: Reads data from a CD/DVD image stream using a low-level driver interface.
+*/
+void _cdio_read(undefined4 *param_1,undefined8 param_2,undefined8 param_3)
+{
+  cdio_stream_read(*param_1,param_2,param_3,1);
+  return;
+}","/*
+* Function: _cdio_read
+* Purpose: Reads data from a CD/DVD image stream using a low-level driver interface.
+*/
+void _cdio_read(undefined4 *param_1,undefined8 param_2,undefined8 param_3)
+{
+  NOTE: 调用底层驱动读取数据，但未对param_1（流句柄指针）或读取结果进行错误检查。
+  cdio_stream_read(*param_1,param_2,param_3,1);
+  return;
+}"
+47,"/*
+* Function: main
+* Purpose: Simulates memory layout and prints size/structure information of data types
+*/
+undefined8 main(void)
+
+{
+  long in_FS_OFFSET;
+  undefined4 local_20;
+  undefined8 local_1c;
+  undefined4 local_14;
+  long local_10;
+  
+  local_10 = *(long *)(in_FS_OFFSET + 0x28);
+  local_20 = 0x64655a;
+  local_1c = 0x53202e412064655a;
+  local_14 = 0x776168;
+  printf(""The size of an int: %ld\n"",4);
+  printf(""The size of areas (int[]): %ld\n"",0x14);
+  printf(""The number of ints in areas: %ld\n"",5);
+  printf(""The size of a char: %ld\n"",1);
+  printf(""The size of name (char[]): %ld\n"",4);
+  printf(""The number of chars: %ld\n"",4);
+  printf(""The size of full_name (char[]): %ld\n"",0xc);
+  printf(""The number of chars: %ld\n"",0xc);
+  printf(""name=\""%s\"" and full_name=\""%s\""\n"",&local_20,&local_1c);
+  if (local_10 == *(long *)(in_FS_OFFSET + 0x28)) {
+    return 0;
+  }
+                    
+  __stack_chk_fail();
+}","/*
+* Function: main
+* Purpose: Simulates memory layout and prints size/structure information of data types
+*/
+undefined8 main(void)
+
+{
+  long in_FS_OFFSET;
+  undefined4 local_20;
+  undefined8 local_1c;
+  undefined4 local_14;
+  long local_10;
+  
+  local_10 = *(long *)(in_FS_OFFSET + 0x28); /* NOTE: 初始化栈保护金丝雀值，用于检测缓冲区溢出。 */
+  local_20 = 0x64655a; /* NOTE: 为字符数组'name'的第一个元素赋值，对应字符'Z','e','d'。 */
+  local_1c = 0x53202e412064655a; /* NOTE: 为字符数组'full_name'赋值，对应字符串""Zed A. Shaw""。 */
+  local_14 = 0x776168; /* NOTE: 为字符数组'name'的剩余部分赋值，对应字符'h','a','w'。 */
+  printf(""The size of an int: %ld\n"",4); /* NOTE: 硬编码int类型的大小为4字节。 */
+  printf(""The size of areas (int[]): %ld\n"",0x14); /* NOTE: 硬编码int数组'areas'的总大小为20字节。 */
+  printf(""The number of ints in areas: %ld\n"",5); /* NOTE: 硬编码数组'areas'包含5个整数元素。 */
+  printf(""The size of a char: %ld\n"",1); /* NOTE: 硬编码char类型的大小为1字节。 */
+  printf(""The size of name (char[]): %ld\n"",4); /* NOTE: 硬编码字符数组'name'的大小为4字节。 */
+  printf(""The number of chars: %ld\n"",4); /* NOTE: 硬编码'name'包含4个字符。 */
+  printf(""The size of full_name (char[]): %ld\n"",0xc); /* NOTE: 硬编码字符数组'full_name'的大小为12字节。 */
+  printf(""The number of chars: %ld\n"",0xc); /* NOTE: 硬编码'full_name'包含12个字符。 */
+  printf(""name=\""%s\"" and full_name=\""%s\""\n"",&local_20,&local_1c); /* NOTE: 打印两个字符串，分别从local_20和local_1c的地址开始。 */
+  if (local_10 == *(long *)(in_FS_OFFSET + 0x28)) { /* NOTE: 检查栈保护金丝雀值是否被修改。 */
+    return 0;
+  }
+                    
+  __stack_chk_fail(); /* NOTE: 栈保护检查失败时调用此函数终止程序。 */
+}"
+48,"/*
+* Function: _cdio_read
+* Purpose: Reads data from a CD/DVD image stream using a low-level driver.
+*/
+void _cdio_read(undefined4 *param_1,undefined8 param_2,undefined8 param_3)
+{
+  cdio_stream_read(*param_1,param_2,param_3,1);
+  return;
+}","/*
+* Function: _cdio_read
+* Purpose: Reads data from a CD/DVD image stream using a low-level driver.
+*/
+void _cdio_read(undefined4 *param_1,undefined8 param_2,undefined8 param_3)
+{
+  /* NOTE: 调用底层驱动读取数据，但未检查 param_1 是否为有效指针，也未处理可能的读取错误。 */
+  cdio_stream_read(*param_1,param_2,param_3,1);
+  return;
+}"
+49,"/*
+* Function: main
+* Purpose: Simulates a program that prints size and count information about basic types instances and character arrays buffers,
+*/
+undefined8 main(void)
+
+{
+  long in_FS_OFFSET;
+  undefined4 local_20;
+  undefined8 local_1c;
+  undefined4 local_14;
+  long local_10;
+  
+  local_10 = *(long *)(in_FS_OFFSET + 0x28);
+  local_20 = 0x64655a;
+  local_1c = 0x53202e412064655a;
+  local_14 = 0x776168;
+  printf(""The size of an int: %ld\n"",4);
+  printf(""The size of areas (int[]): %ld\n"",0x14);
+  printf(""The number of ints in areas: %ld\n"",5);
+  printf(""The size of a char: %ld\n"",1);
+  printf(""The size of name (char[]): %ld\n"",4);
+  printf(""The number of chars: %ld\n"",4);
+  printf(""The size of full_name (char[]): %ld\n"",0xc);
+  printf(""The number of char: %ld\n"",0xc);
+  printf(""name=\""%s\"" and full_name=\""%s\""\n"",&local_20,&local_1c);
+  if (local_10 == *(long *)(in_FS_OFFSET + 0x28)) {
+    return 0;
+  }
+                    
+  __stack_chk_fail();
+}","/*
+* Function: main
+* Purpose: Simulates a program that prints size and count information about basic types instances and character arrays buffers,
+*/
+undefined8 main(void)
+
+{
+  long in_FS_OFFSET;
+  undefined4 local_20;
+  undefined8 local_1c;
+  undefined4 local_14;
+  long local_10;
+  
+  local_10 = *(long *)(in_FS_OFFSET + 0x28);
+  local_20 = 0x64655a; /* NOTE: 初始化字符数据，可能对应字符串 ""Zed"" 的一部分。 */
+  local_1c = 0x53202e412064655a; /* NOTE: 初始化字符数据，可能对应字符串 ""Zed A. S"" 的一部分。 */
+  local_14 = 0x776168; /* NOTE: 初始化字符数据，可能对应字符串 ""haw"" 的一部分。 */
+  printf(""The size of an int: %ld\n"",4); /* NOTE: 硬编码整数大小，应使用sizeof(int)。 */
+  printf(""The size of areas (int[]): %ld\n"",0x14); /* NOTE: 硬编码数组大小（20字节），应使用sizeof计算。 */
+  printf(""The number of ints in areas: %ld\n"",5); /* NOTE: 硬编码数组元素个数（5）。 */
+  printf(""The size of a char: %ld\n"",1); /* NOTE: 硬编码字符大小，应使用sizeof(char)。 */
+  printf(""The size of name (char[]): %ld\n"",4); /* NOTE: 硬编码数组大小（4字节）。 */
+  printf(""The number of chars: %ld\n"",4); /* NOTE: 硬编码字符个数（4）。 */
+  printf(""The size of full_name (char[]): %ld\n"",0xc); /* NOTE: 硬编码数组大小（12字节）。 */
+  printf(""The number of char: %ld\n"",0xc); /* NOTE: 硬编码字符个数（12）。 */
+  printf(""name=\""%s\"" and full_name=\""%s\""\n"",&local_20,&local_1c); /* NOTE: 打印由整数常量初始化的字符串。 */
+  if (local_10 == *(long *)(in_FS_OFFSET + 0x28)) {
+    return 0;
+  }
+                    
+  __stack_chk_fail(); /* NOTE: 栈保护失败处理函数，用于检测栈溢出。 */
+}"
+50,"/*
+* Function: _cdio_read
+* Purpose: Reads data from a CD/DVD image stream using a low-level driver interface.
+*/
+void _cdio_read(undefined4 *param_1,undefined8 param_2,undefined8 param_3)
+{
+  cdio_stream_read(*param_1,param_2,param_3,1);
+  return;
+}","/*
+* Function: _cdio_read
+* Purpose: Reads data from a CD/DVD image stream using a low-level driver interface.
+*/
+void _cdio_read(undefined4 *param_1,undefined8 param_2,undefined8 param_3)
+{
+  /* NOTE: 调用底层驱动读取数据，但未检查param_1是否为有效指针，也未处理读取失败的情况。 */
+  cdio_stream_read(*param_1,param_2,param_3,1);
+  /* NOTE: 函数返回类型为void，此return语句是冗余的。 */
+  return;
+}"
+51,"/*
+* Function: wpas_dbus_handler_reconnect
+* Purpose: Handles a D-Bus request to reconnect a wireless interface.
+*/
+undefined8 wpas_dbus_handler_reconnect(undefined8 param_1,long *param_2)
+{
+  undefined8 uVar1;
+  
+  if (*param_2 == WPA_INTERFACE_DISABLED) {
+    uVar1 = dbus_message_new_error
+                      (param_1,WPAS_DBUS_ERROR_IFACE_DISABLED,""This interface is disabled"");
+    return uVar1;
+  }
+  if (param_2[1] == 0) {
+    return 0;
+  }
+  wpas_request_connection(param_2);
+  return 0;
+}","/*
+* Function: wpas_dbus_handler_reconnect
+* Purpose: Handles a D-Bus request to reconnect a wireless interface.
+*/
+undefined8 wpas_dbus_handler_reconnect(undefined8 param_1,long *param_2)
+{
+  undefined8 uVar1;
+  
+  if (*param_2 == WPA_INTERFACE_DISABLED) {
+    uVar1 = dbus_message_new_error
+                      (param_1,WPAS_DBUS_ERROR_IFACE_DISABLED,""This interface is disabled"");
+    return uVar1;
+  }
+  if (param_2[1] == 0) { // NOTE: 检查第二个参数是否为0，可能表示某种状态无效。
+    return 0;
+  }
+  wpas_request_connection(param_2); // NOTE: 调用核心连接请求函数。
+  return 0;
+}
+"
+52,"/*
+* Function: wpas_dbus_handler_reconnect
+* Purpose: Handles a D-Bus request to reconnect a wireless interface.
+*/
+undefined8 wpas_dbus_handler_reconnect(undefined8 param_1,long *param_2)
+{
+  undefined8 uVar1;
+  
+  if (*param_2 == WPA_INTERFACE_DISABLED) {
+    uVar1 = dbus_message_new_error
+                      (param_1,WPAS_DBUS_ERROR_IFACE_DISABLED,""This interface is disabled"");
+    return uVar1;
+  }
+  if (param_2[1] == 0) {
+    return 0;
+  }
+  wpas_request_connection(param_2);
+  return 0;
+}","/*
+* Function: wpas_dbus_handler_reconnect
+* Purpose: Handles a D-Bus request to reconnect a wireless interface.
+*/
+undefined8 wpas_dbus_handler_reconnect(undefined8 param_1,long *param_2)
+{
+  undefined8 uVar1;
+  
+  if (*param_2 == WPA_INTERFACE_DISABLED) {
+    uVar1 = dbus_message_new_error
+                      (param_1,WPAS_DBUS_ERROR_IFACE_DISABLED,""This interface is disabled"");
+    return uVar1;
+  }
+  if (param_2[1] == 0) {
+    return 0;
+  }
+  wpas_request_connection(param_2); // NOTE: 调用底层连接请求函数，param_2 应指向有效数据结构。
+  return 0;
+}"
+53,"/*
+* Function: _cdio_read
+* Purpose: Reads data from a CD/DVD drive using a low-level stream interface.
+*/
+void _cdio_read(undefined4 *param_1,undefined8 param_2,undefined8 param_3)
+{
+  cdio_stream_read(*param_1,param_2,param_3,1);
+  return;
+}","/*
+* Function: _cdio_read
+* Purpose: Reads data from a CD/DVD drive using a low-level stream interface.
+* NOTE: 此函数是底层读取操作的简单包装，直接调用 cdio_stream_read。
+* NOTE: 参数 param_1 应为流句柄，param_2 和 param_3 分别表示目标缓冲区和读取大小。
+* NOTE: 调用者需确保参数有效，因为函数内部未进行验证。
+*/
+void _cdio_read(undefined4 *param_1,undefined8 param_2,undefined8 param_3)
+{
+  cdio_stream_read(*param_1,param_2,param_3,1); // NOTE: 执行读取操作，最后一个参数常为1（可能表示块读取模式）。
+  return;
+}"
+54,"/*
+* Function: next_node
+* Purpose: Navigates a node structure using offset-based pointer arithmetic to retrieve child nodes.
+*/
+undefined8 * next_node(undefined8 *param_1,int param_2)
+
+{
+  if (param_2 == 1) {
+    return (undefined8 *)param_1[2];
+  }
+  if (param_2 != 2) {
+    if (param_2 != 3) {
+      return param_1;
+    }
+    return (undefined8 *)*param_1;
+  }
+  return (undefined8 *)param_1[1];
+}","/*
+* Function: next_node
+* Purpose: Navigates a node structure using offset-based pointer arithmetic to retrieve child nodes.
+*/
+undefined8 * next_node(undefined8 *param_1,int param_2)
+
+{
+  if (param_2 == 1) {
+    return (undefined8 *)param_1[2]; // NOTE: 当param_2为1时，返回节点中偏移为2的指针。
+  }
+  if (param_2 != 2) {
+    if (param_2 != 3) {
+      return param_1; // NOTE: 对于非1、2、3的param_2值，直接返回原节点指针。
+    }
+    return (undefined8 *)*param_1; // NOTE: 当param_2为3时，返回节点中偏移为0的指针所指向的内容。
+  }
+  return (undefined8 *)param_1[1]; // NOTE: 当param_2为2时，返回节点中偏移为1的指针。
+}
+"
+55,"/*
+* Function: uhci_fsbr-timeout
+* Purpose: Handles timeout event for FSBR (Full Speed Bus Reset) mechanism in UHCI USB controller.
+*/
+void uhci_fsbr_timeout(undefined8 param_1)
+{
+  long lVar1;
+  
+  lVar1 = from_timer(0,param_1,fsbr_timer);
+  spin_lock_irqsave(lVar1,0);
+  if (*(long *)(lVar1 + 8) != 0) {
+    *(undefined8 *)(lVar1 + 8) = 0;
+    uhci_fsbr_off(lVar1);
+  }
+  spin_unlock_irqrestore(lVar1,0);
+  return;
+}","/*
+* Function: uhci_fsbr-timeout
+* Purpose: Handles timeout event for FSBR (Full Speed Bus Reset) mechanism in UHCI USB controller.
+*/
+void uhci_fsbr_timeout(undefined8 param_1)
+{
+  long lVar1;
+  
+  lVar1 = from_timer(0,param_1,fsbr_timer); /* NOTE: 从定时器结构体中获取控制器指针。 */
+  spin_lock_irqsave(lVar1,0); /* NOTE: 获取自旋锁以保护共享数据。 */
+  if (*(long *)(lVar1 + 8) != 0) { /* NOTE: 检查FSBR状态标志是否被设置。 */
+    *(undefined8 *)(lVar1 + 8) = 0; /* NOTE: 清除FSBR状态标志。 */
+    uhci_fsbr_off(lVar1); /* NOTE: 关闭控制器的FSBR功能。 */
+  }
+  spin_unlock_irqrestore(lVar1,0); /* NOTE: 释放自旋锁并恢复中断状态。 */
+  return;
+}"
+56,"/*
+* Function: next_node
+* Purpose: Navigates a structured memory layout representing a node with multiple child references.
+*/
+undefined8 * next_node(undefined8 *param_1,int param_2)
+{
+  if (param_2 == 1) {
+    return (undefined8 *)param_1[2];
+  }
+  if (param_2 != 2) {
+    if (param_2 != 3) {
+      return param_1;
+    }
+    return (undefined8 *)*param_1;
+  }
+  return (undefined8 *)param_1[1];
+}","/*
+* Function: next_node
+* Purpose: Navigates a structured memory layout representing a node with multiple child references.
+*/
+undefined8 * next_node(undefined8 *param_1,int param_2)
+{
+  if (param_2 == 1) {
+    return (undefined8 *)param_1[2]; // NOTE: 当param_2为1时，返回节点中偏移为2的指针。
+  }
+  if (param_2 != 2) {
+    if (param_2 != 3) {
+      return param_1; // NOTE: 当param_2不是1、2、3时，直接返回原节点指针。
+    }
+    return (undefined8 *)*param_1; // NOTE: 当param_2为3时，返回节点中第一个指针所指向的内容。
+  }
+  return (undefined8 *)param_1[1]; // NOTE: 当param_2为2时，返回节点中偏移为1的指针。
+}
+"
+57,"/*
+* Function: next_node
+* Purpose: Navigates a node structure using offset-based indexing to return a linked child node.
+*/
+undefined8 * next_node(undefined8 *param_1,int param_2)
+
+{
+  if (param_2 == 1) {
+    param_1 = (undefined8 *)param_1[2];
+  }
+  else if (param_2 == 2) {
+    param_1 = (undefined8 *)param_1[1];
+  }
+  else if (param_2 == 3) {
+    param_1 = (undefined8 *)*param_1;
+  }
+  return param_1;
+}","/*
+* Function: next_node
+* Purpose: Navigates a node structure using offset-based indexing to return a linked child node.
+*/
+undefined8 * next_node(undefined8 *param_1,int param_2)
+
+{
+  if (param_2 == 1) {
+    param_1 = (undefined8 *)param_1[2]; // NOTE: 当param_2为1时，返回param_1偏移2个元素（即第三个元素）的指针。
+  }
+  else if (param_2 == 2) {
+    param_1 = (undefined8 *)param_1[1]; // NOTE: 当param_2为2时，返回param_1偏移1个元素（即第二个元素）的指针。
+  }
+  else if (param_2 == 3) {
+    param_1 = (undefined8 *)*param_1; // NOTE: 当param_2为3时，返回param_1指向的第一个元素（即param_1[0]）的指针。
+  }
+  return param_1; // NOTE: 如果param_2不是1、2、3，则直接返回输入的param_1指针。
+}
+"
+58,"/*
+* Function: next_node
+* Purpose: Navigates a linked or tree-like data structure by offset-based indexing to retrieve a child node.
+*/
+undefined8 * next_node(undefined8 *param_1,int param_2)
+{
+  if (param_2 == 1) {
+    return (undefined8 *)param_1[2];
+  }
+  if (param_2 != 2) {
+    if (param_2 == 3) {
+      param_1 = (undefined8 *)*param_1;
+    }
+    return param_1;
+  }
+  return (undefined8 *)param_1[1];
+}","/*
+* Function: next_node
+* Purpose: Navigates a linked or tree-like data structure by offset-based indexing to retrieve a child node.
+* NOTE: 函数根据param_2的值返回param_1指向的节点的不同部分。
+* NOTE: param_1应指向一个包含多个指针的节点结构体。
+* NOTE: param_2为1返回第三个成员，为2返回第二个成员，为3返回第一个成员指向的内容，其他值直接返回param_1。
+*/
+undefined8 * next_node(undefined8 *param_1,int param_2)
+{
+  if (param_2 == 1) {
+    return (undefined8 *)param_1[2]; // NOTE: 返回节点中索引为2的指针（可能是右子节点或下一个节点）。
+  }
+  if (param_2 != 2) {
+    if (param_2 == 3) {
+      param_1 = (undefined8 *)*param_1; // NOTE: 将param_1更新为其指向的第一个指针的值。
+    }
+    return param_1; // NOTE: 当param_2为0、3或其他非1/2值时，返回param_1（或更新后的值）。
+  }
+  return (undefined8 *)param_1[1]; // NOTE: 当param_2为2时，返回节点中索引为1的指针（可能是左子节点或前一个节点）。
+}
+"
+59,"/*
+* Function: uhci_fsbr-timeout
+* Purpose: Handles timeout for Full-Speed Bus Restoration (FSBR) in UHCI USB controller.
+*/
+void uhci_fsbr_timeout(undefined8 param_1)
+{
+  long lVar1;
+  
+  lVar1 = from_timer(0,param_1,fsbr_timer);
+  spin_lock_irqsave(lVar1,0);
+  if (*(long *)(lVar1 + 8) == 0) {
+    spin_unlock_irqrestore(lVar1,0);
+    return;
+  }
+  *(undefined8 *)(lVar1 + 8) = 0;
+  uhci_fsbr_off(lVar1);
+  spin_unlock_irqrestore(lVar1,0);
+  return;
+}","/*
+* Function: uhci_fsbr-timeout
+* Purpose: Handles timeout for Full-Speed Bus Restoration (FSBR) in UHCI USB controller.
+*/
+void uhci_fsbr_timeout(undefined8 param_1) /* NOTE: param_1 应为指向包含定时器结构的指针 */
+{
+  long lVar1;
+  
+  lVar1 = from_timer(0,param_1,fsbr_timer); /* NOTE: 将param_1转换为包含定时器的结构体指针 */
+  spin_lock_irqsave(lVar1,0); /* NOTE: 获取自旋锁以保护共享数据 */
+  if (*(long *)(lVar1 + 8) == 0) { /* NOTE: 检查FSBR状态标志是否为0（可能表示未激活） */
+    spin_unlock_irqrestore(lVar1,0);
+    return;
+  }
+  *(undefined8 *)(lVar1 + 8) = 0; /* NOTE: 将FSBR状态标志清零 */
+  uhci_fsbr_off(lVar1); /* NOTE: 调用函数关闭FSBR功能 */
+  spin_unlock_irqrestore(lVar1,0);
+  return; /* NOTE: 冗余的return语句，可以省略 */
+}
+"
+60,"/*
+* Function: uhci_fsbr_timeout
+* Purpose: Handles timeout event for FSBR (Full Speed Bus Reset) mechanism in UHCI USB controller.
+*/
+void uhci_fsbr_timeout(undefined8 param_1)
+{
+  long lVar1;
+  
+  lVar1 = from_timer(0,param_1,fsbr_timer);
+  spin_lock_irqsave(lVar1,0);
+  if (*(long *)(lVar1 + 8) == 0) {
+    spin_unlock_irqrestore(lVar1,0);
+    return;
+  }
+  *(undefined8 *)(lVar1 + 8) = 0;
+  uhci_fsbr_off(lVar1);
+  spin_unlock_irqrestore(lVar1,0);
+  return;
+}","/*
+* Function: uhci_fsbr_timeout
+* Purpose: Handles timeout event for FSBR (Full Speed Bus Reset) mechanism in UHCI USB controller.
+*/
+void uhci_fsbr_timeout(undefined8 param_1) // NOTE: param_1 is expected to be a pointer to a timer structure.
+{
+  long lVar1; // NOTE: lVar1 holds a pointer to the UHCI controller state structure.
+  
+  lVar1 = from_timer(0,param_1,fsbr_timer); // NOTE: Converts timer pointer to controller pointer. Assumes param_1 is valid.
+  spin_lock_irqsave(lVar1,0); // NOTE: Acquires spinlock to protect shared controller state.
+  if (*(long *)(lVar1 + 8) == 0) { // NOTE: Checks if the FSBR active flag (at offset 8) is already cleared.
+    spin_unlock_irqrestore(lVar1,0);
+    return;
+  }
+  *(undefined8 *)(lVar1 + 8) = 0; // NOTE: Clears the FSBR active flag.
+  uhci_fsbr_off(lVar1); // NOTE: Turns off the FSBR mechanism in the hardware.
+  spin_unlock_irqrestore(lVar1,0);
+  return;
+}"
+61,"/*
+* Function: characters
+* Purpose: Outputs a string representation of a long integer parameter, treating it as a pointer-like value.
+*/
+void characters(long param_1)
+{
+  if (param_1 == 0) {
+    printf(""characters [*NULL*]\n"",0);
+  }
+  else {
+    printf(""characters [%s]\n"",param_1);
+  }
+  return;
+}","/*
+* Function: characters
+* Purpose: Outputs a string representation of a long integer parameter, treating it as a pointer-like value.
+* NOTE: 此注释描述不准确，函数实际将参数视为指向字符串的指针并打印。
+*/
+void characters(long param_1) // NOTE: 参数类型为long，但被用作字符串指针(char*)，存在类型安全问题。
+{
+  if (param_1 == 0) { // NOTE: 检查参数是否为0（NULL指针）。
+    printf(""characters [*NULL*]\n"",0); // NOTE: 格式字符串包含一个未使用的额外参数0。
+  }
+  else {
+    printf(""characters [%s]\n"",param_1); // NOTE: 将long类型的param_1直接传递给%s格式说明符，可能导致崩溃。
+  }
+  return;
+}"
+62,"/*
+* Function: characters
+* Purpose: Conditionally prints a message based on the value of a long integer parameter.
+*/
+void characters(long param_1)
+{
+  if (param_1 != 0) {
+    printf(""characters [%s]\n"",param_1);
+    return;
+  }
+  printf(""characters [*NULL*]\n"",0);
+  return;
+}","/*
+* Function: characters
+* Purpose: Conditionally prints a message based on the value of a long integer parameter.
+* NOTE: 此注释与实际代码行为不符。函数实际功能是：根据参数是否为NULL指针，打印不同的字符串信息。
+* NOTE: 参数param_1应为指向字符的指针（char*），但此处被声明为long，存在类型不匹配风险。
+*/
+void characters(long param_1)
+{
+  if (param_1 != 0) {
+    printf(""characters [%s]\n"",param_1); /* NOTE: 将long类型的param_1作为字符串指针(%s)传递，这是错误的，可能导致程序崩溃。 */
+    return;
+  }
+  printf(""characters [*NULL*]\n"",0); /* NOTE: 格式字符串不需要参数，但提供了参数0，该参数不会被使用。 */
+  return;
+}"
+63,"/*
+* Function: characters
+* Purpose: Conditionally prints a string representation of a long integer parameter,
+*/
+void characters(long param_1)
+{
+  if (param_1 != 0) {
+    printf(""characters [%s]\n"",param_1);
+    return;
+  }
+  printf(""characters [*NULL*]\n"",0);
+  return;
+}","/*
+* Function: characters
+* Purpose: Conditionally prints a string representation of a long integer parameter,
+* NOTE: 实际功能是：根据参数是否为0，打印其作为字符串地址的内容或NULL标记。
+* NOTE: 存在严重类型错误：printf的%s期望char*，但param_1是long。
+*/
+void characters(long param_1)
+{
+  if (param_1 != 0) {
+    printf(""characters [%s]\n"",param_1); /* NOTE: 错误：将long类型作为字符串指针传递。 */
+    return;
+  }
+  printf(""characters [*NULL*]\n"",0); /* NOTE: 冗余参数0未被格式字符串使用。 */
+  return; /* NOTE: 冗余的return语句，前一个分支已返回。 */
+}"
+64,"/*
+* Function: characters
+* Purpose: Prints a descriptive message based on the value of a long integer parameter.
+*/
+void characters(long param_1)
+{
+  if (param_1 == 0) {
+    printf(""characters [*NULL*]\n"",0);
+  }
+  else {
+    printf(""characters [%s]\n"",param_1);
+  }
+  return;
+}","/*
+* Function: characters
+* Purpose: Prints a descriptive message based on the value of a long integer parameter.
+*/
+void characters(long param_1)
+{
+  if (param_1 == 0) {
+    printf(""characters [*NULL*]\n"",0); /* NOTE: 当参数为0时，打印NULL标记。第二个参数'0'未被格式字符串使用。 */
+  }
+  else {
+    printf(""characters [%s]\n"",param_1); /* NOTE: 将long型参数作为字符串指针(%s)打印，存在类型不匹配风险。 */
+  }
+  return;
+}"
+65,"/*
+* Function: dmu_objset_hold_flags
+* Purpose: Attempts to hold a dataset object set with optional decryption flag,
+*/
+int dmu_objset_hold_flags
+              (undefined8 param_1,long param_2,undefined8 param_3,undefined8 param_4,
+              undefined8 param_5,undefined8 param_6)
+{
+  undefined4 uVar1;
+  int iVar2;
+  long in_FS_OFFSET;
+  undefined8 local_20;
+  undefined8 local_18;
+  long local_10;
+  
+  local_10 = *(long *)(in_FS_OFFSET + 0x28);
+  uVar1 = DS_HOLD_FLAG_DECRYPT;
+  if (param_2 == 0) {
+    uVar1 = 0;
+  }
+  iVar2 = dsl_pool_hold(param_1,param_3,&local_20);
+  if (iVar2 == 0) {
+    iVar2 = dsl_dataset_hold_flags(local_20,param_1,eVar1,param_3,&local_18,param_6,param_4);
+    if (iVar2 == 0) {
+        iVar2 = dmu_objset_from_ds(local_18,param_4);
+        if (iVar2 != 0) {
+          dsl_dataset_rele(local_18,param_3);
+          dsl_pool_rele(local_20,param_3);
+        }
+    }
+    else {
+      dsl_pool_rele(local_20,param_3);
+    }
+  }
+  if (local_10 == *(long *)(in_FS_OFFSET + 0x28)) {
+    return iVar2;
+  }
+                    
+  __stack_chk_fail();
+}","/*
+* Function: dmu_objset_hold_flags
+* Purpose: Attempts to hold a dataset object set with optional decryption flag,
+*/
+int dmu_objset_hold_flags
+              (undefined8 param_1,long param_2,undefined8 param_3,undefined8 param_4,
+              undefined8 param_5,undefined8 param_6)
+{
+  undefined4 uVar1;
+  int iVar2;
+  long in_FS_OFFSET;
+  undefined8 local_20;
+  undefined8 local_18;
+  long local_10;
+  
+  local_10 = *(long *)(in_FS_OFFSET + 0x28); /* NOTE: 栈保护检查初始化。 */
+  uVar1 = DS_HOLD_FLAG_DECRYPT; /* NOTE: 设置默认标志。 */
+  if (param_2 == 0) { /* NOTE: 根据param_2决定是否使用解密标志。 */
+    uVar1 = 0;
+  }
+  iVar2 = dsl_pool_hold(param_1,param_3,&local_20); /* NOTE: 尝试持有池资源。 */
+  if (iVar2 == 0) { /* NOTE: 池资源获取成功。 */
+    iVar2 = dsl_dataset_hold_flags(local_20,param_1,eVar1,param_3,&local_18,param_6,param_4); /* NOTE: 尝试持有数据集。 */
+    if (iVar2 == 0) { /* NOTE: 数据集获取成功。 */
+        iVar2 = dmu_objset_from_ds(local_18,param_4); /* NOTE: 从数据集获取对象集。 */
+        if (iVar2 != 0) { /* NOTE: 获取对象集失败。 */
+          dsl_dataset_rele(local_18,param_3); /* NOTE: 释放数据集资源。 */
+          dsl_pool_rele(local_20,param_3); /* NOTE: 释放池资源。 */
+        }
+    }
+    else { /* NOTE: 数据集获取失败。 */
+      dsl_pool_rele(local_20,param_3); /* NOTE: 仅释放池资源。 */
+    }
+  }
+  if (local_10 == *(long *)(in_FS_OFFSET + 0x28)) { /* NOTE: 栈保护检查验证。 */
+    return iVar2; /* NOTE: 返回最终操作状态。 */
+  }
+                    
+  __stack_chk_fail(); /* NOTE: 栈损坏检测失败处理。 */
+}
+"
+66,"/*
+* Function: dmu_objset_hold_flags
+* Purpose: Retrieves a reference to a dataset's objset with optional decryption flag.
+*/
+int dmu_objset_hold_flags(undefined8 param_1,long param_2,undefined8 param_3,undefined8 param_4)
+{
+  int iVar1;
+  undefined4 uVar2;
+  long in_FS_OFFSET;
+  undefined8 local_40;
+  undefined8 local_38;
+  long local_30;
+  
+  local_30 = *(long *)(in_FS_OFFSET + 0x28);
+  uVar2 = 0;
+  if (param_2 != 0) {
+    uVar2 = DS_HOLD_FLAG_DECRYPT;
+  }
+  iVar1 = dsl_pool_hold(param_1,param_3,&local_40);
+  if (iVar1 == 0) {
+    iVar1 = dsl_dataset_hold_flags(local_40,param_1,uVar2,param_3,&local_38);
+    if (iVar1 == 0) {
+      iVar1 = dmu_objset_from_ds(local_38,param_4);
+      if (iVar1 != 0) {
+        dsl_dataset_rele(local_38,param_3);
+        dsl_pool_rele(local_40,param_3);
+      }
+    }
+    else {
+      dsl_pool_rele(local_40,param_3);
+    }
+  }
+  if (local_30 == *(long *)(in_FS_OFFSET + 0x28)) {
+    return iVar1;
+  }
+                    
+  __stack_chk_fail();
+}","/*
+* Function: dmu_objset_hold_flags
+* Purpose: Retrieves a reference to a dataset's objset with optional decryption flag.
+*/
+int dmu_objset_hold_flags(undefined8 param_1,long param_2,undefined8 param_3,undefined8 param_4)
+{
+  int iVar1;
+  undefined4 uVar2;
+  long in_FS_OFFSET;
+  undefined8 local_40;
+  undefined8 local_38;
+  long local_30;
+  
+  local_30 = *(long *)(in_FS_OFFSET + 0x28); /* NOTE: 加载栈保护金丝雀值以检测缓冲区溢出 */
+  uVar2 = 0;
+  if (param_2 != 0) {
+    uVar2 = DS_HOLD_FLAG_DECRYPT; /* NOTE: 根据param_2设置解密标志 */
+  }
+  iVar1 = dsl_pool_hold(param_1,param_3,&local_40); /* NOTE: 尝试获取池(pool)引用 */
+  if (iVar1 == 0) {
+    iVar1 = dsl_dataset_hold_flags(local_40,param_1,uVar2,param_3,&local_38); /* NOTE: 尝试获取带标志的数据集引用 */
+    if (iVar1 == 0) {
+      iVar1 = dmu_objset_from_ds(local_38,param_4); /* NOTE: 从数据集获取对象集(objset) */
+      if (iVar1 != 0) {
+        dsl_dataset_rele(local_38,param_3); /* NOTE: 获取objset失败，释放数据集引用 */
+        dsl_pool_rele(local_40,param_3); /* NOTE: 获取objset失败，释放池引用 */
+      }
+    }
+    else {
+      dsl_pool_rele(local_40,param_3); /* NOTE: 获取数据集失败，释放池引用 */
+    }
+  }
+  if (local_30 == *(long *)(in_FS_OFFSET + 0x28)) { /* NOTE: 验证栈保护金丝雀值是否被修改 */
+    return iVar1; /* NOTE: 返回操作结果状态码 */
+  }
+                    
+  __stack_chk_fail(); /* NOTE: 栈保护检查失败，终止程序 */
+}"
+67,"/*
+* Function: init_once
+* Purpose: Initializes a newly allocated inode structure with default values and kernel subsystem hooks.
+*/
+void init_once(long param_1)
+{
+  spin_lock_init(param_1 + 0x20);
+  *(undefined8 *)(param_1 + 0x18) = 0;
+  *(long *)(param_1 + 0x10) = FAT_CACHE_VALID + 1;
+  INIT_LIST_HEAD(param_1 + 8);
+  INIT_HLIST_NODE(param_1 + 4);
+  inode_init_once(param_1);
+  return;
+}","/*
+* Function: init_once
+* Purpose: Initializes a newly allocated inode structure with default values and kernel subsystem hooks.
+*/
+void init_once(long param_1) /* NOTE: param_1 is likely a pointer to an inode structure. */
+{
+  spin_lock_init(param_1 + 0x20); /* NOTE: Initializes a spinlock at offset 0x20 within the structure. */
+  *(undefined8 *)(param_1 + 0x18) = 0; /* NOTE: Sets an 8-byte field at offset 0x18 to zero. */
+  *(long *)(param_1 + 0x10) = FAT_CACHE_VALID + 1; /* NOTE: Sets a long field at offset 0x10 to a constant value. */
+  INIT_LIST_HEAD(param_1 + 8); /* NOTE: Initializes a list head at offset 8. */
+  INIT_HLIST_NODE(param_1 + 4); /* NOTE: Initializes a hash list node at offset 4. */
+  inode_init_once(param_1); /* NOTE: Calls a kernel function for further inode initialization. */
+  return;
+}"
+68,"/*
+* Function: dmu_objset_hold_flags
+* Purpose: Retrieves a reference to an object set (dmu_objset_t) by holding its underlying dataset and pool, optionally decrypting if requested.
+*/
+int dmu_objset_hold_flags(undefined8 param_1,long param_2,undefined8 param_3,undefined8 param_4)
+{
+  int iVar1;
+  undefined4 uVar2;
+  long in_FS_OFFSET;
+  undefined8 local_40;
+  undefined8 local_38;
+  long local_30;
+  
+  local_30 = *(long *)(in_FS_OFFSET + 0x28);
+  uVar2 = 0;
+  if (param_2 != 0) {
+    uVar2 = DS_HOLD_FLAG_DECRYPT;
+  }
+  iVar1 = dsl_pool_hold(param_1,param_3,&local_40);
+  if (iVar1 == 0) {
+    iVar1 = dsl_dataset_hold_flags(local_40,param_1,uVar2,param_3,&local_38);
+    if (iVar1 == 0) {
+      iVar1 = dmu_objset_from_ds(local_38,param_4);
+      if (iVar1 == 0) goto LAB_0010004f;
+    dsl_dataset_rele(local_38,param_3);
+    }
+    dsl_pool_rele(local_40,param_3);
+  }
+LAB_0010004f:
+  if (local_30 == *(long *)(in_FS_OFFSET + 0x28)) {
+    return iVar1;
+  }
+                    
+  __stack_chk_fail();
+}","/*
+* Function: dmu_objset_hold_flags
+* Purpose: Retrieves a reference to an object set (dmu_objset_t) by holding its underlying dataset and pool, optionally decrypting if requested.
+*/
+int dmu_objset_hold_flags(undefined8 param_1,long param_2,undefined8 param_3,undefined8 param_4)
+{
+  int iVar1;
+  undefined4 uVar2;
+  long in_FS_OFFSET;
+  undefined8 local_40;
+  undefined8 local_38;
+  long local_30;
+  
+  local_30 = *(long *)(in_FS_OFFSET + 0x28);
+  uVar2 = 0;
+  if (param_2 != 0) {
+    uVar2 = DS_HOLD_FLAG_DECRYPT;
+  }
+  iVar1 = dsl_pool_hold(param_1,param_3,&local_40);
+  if (iVar1 == 0) {
+    iVar1 = dsl_dataset_hold_flags(local_40,param_1,uVar2,param_3,&local_38);
+    if (iVar1 == 0) {
+      iVar1 = dmu_objset_from_ds(local_38,param_4);
+      if (iVar1 == 0) goto LAB_0010004f;
+    dsl_dataset_rele(local_38,param_3);
+    }
+    dsl_pool_rele(local_40,param_3);
+  }
+LAB_0010004f:
+  if (local_30 == *(long *)(in_FS_OFFSET + 0x28)) {
+    return iVar1;
+  }
+                    
+  __stack_chk_fail();
+}"
+69,"/*
+* Function: dmu_objset_hold_flags
+* Purpose: Acquire a reference to a dataset's objset with optional decryption flag, using low-level ZFS internal structures manipulation.
+*/
+int dmu_objset_hold_flags(undefined8 param_1,long param_2,undefined8 param_3,undefined8 param_4)
+{
+  int iVar1;
+  undefined4 uVar2;
+  long in_FS_OFFSET;
+  undefined8 local_40;
+  undefined8 local_38;
+  long local_30;
+  
+  local_30 = *(long *)(in_FS_OFFSET + 0x28);
+  uVar2 = 0;
+  if (param_2 != 0) {
+    uVar2 = DS_HOLD_FLAG_DECRYPT;
+  }
+  iVar1 = dsl_pool_hold(param_1,param_3,&local_40);
+  if (iVar1 == 0) {
+    iVar1 = dsl_dataset_hold_flags(local_40,param_1,uVar2,param_3,&local_38);
+    if (iVar1 == 0) {
+      iVar1 = dmu_objset_from_ds(local_38,param_4);
+      if (iVar1 == 0) goto LAB_0010004f;
+      dsl_dataset_rele(local_38,param_3);
+    }
+    dsl_pool_rele(local_40,param_3);
+  }
+LAB_0010004f:
+  if (local_30 == *(long *)(in_FS_OFFSET + 0x28)) {
+    return iVar1;
+  }
+                    
+  __stack_chk_fail();
+}","/*
+* Function: dmu_objset_hold_flags
+* Purpose: Acquire a reference to a dataset's objset with optional decryption flag, using low-level ZFS internal structures manipulation.
+* NOTE: param_1 is likely the dataset name, param_2 is a flag (non-zero enables decryption), param_3 is a hold tag, param_4 is an output pointer for the objset.
+*/
+int dmu_objset_hold_flags(undefined8 param_1,long param_2,undefined8 param_3,undefined8 param_4)
+{
+  int iVar1;
+  undefined4 uVar2;
+  long in_FS_OFFSET;
+  undefined8 local_40;
+  undefined8 local_38;
+  long local_30;
+  
+  local_30 = *(long *)(in_FS_OFFSET + 0x28); // NOTE: Stack canary for security
+  uVar2 = 0;
+  if (param_2 != 0) {
+    uVar2 = DS_HOLD_FLAG_DECRYPT; // NOTE: Set decryption flag if param_2 is non-zero
+  }
+  iVar1 = dsl_pool_hold(param_1,param_3,&local_40); // NOTE: Acquire a reference to the DSL pool, store handle in local_40
+  if (iVar1 == 0) {
+    iVar1 = dsl_dataset_hold_flags(local_40,param_1,uVar2,param_3,&local_38); // NOTE: Acquire dataset with flags, store handle in local_38
+    if (iVar1 == 0) {
+      iVar1 = dmu_objset_from_ds(local_38,param_4); // NOTE: Get the objset from the dataset handle, store at param_4
+      if (iVar1 == 0) goto LAB_0010004f; // NOTE: Success path, skip cleanup
+      dsl_dataset_rele(local_38,param_3); // NOTE: Release dataset on error from dmu_objset_from_ds
+    }
+    dsl_pool_rele(local_40,param_3); // NOTE: Release pool on error from dsl_dataset_hold_flags or after dataset release
+  }
+LAB_0010004f:
+  if (local_30 == *(long *)(in_FS_OFFSET + 0x28)) {
+    return iVar1; // NOTE: Return status code (0 for success)
+  }
+                    
+  __stack_chk_fail(); // NOTE: Stack corruption detected
+}"
+70,"/*
+* Function: init_once
+* Purpose: Initializes kernel data structures for a newly allocated inode object.
+*/
+void init_once(long param_1)
+{
+  long lVar1;
+  
+  spin_lock_init(param_1 + 0x20);
+  lVar1 = FAT_CACHE_VALID;
+  *(undefined8 *)(param_1 + 0x18) = 0;
+  *(long *)(param_1 + 0x10) = lVar1 + 1;
+  INIT_LIST_HEAD(param_1 + 8);
+  INIT_HLIST_NODE(param_1 + 4);
+  inode_init_once(param_1);
+  return;
+}","/*
+* Function: init_once
+* Purpose: Initializes kernel data structures for a newly allocated inode object.
+* NOTE: param_1 is a pointer to the inode structure to initialize.
+*/
+void init_once(long param_1)
+{
+  long lVar1;
+  
+  spin_lock_init(param_1 + 0x20); // NOTE: Initializes spinlock at offset 0x20 (likely i_lock).
+  lVar1 = FAT_CACHE_VALID; // NOTE: FAT_CACHE_VALID is a constant, likely 0.
+  *(undefined8 *)(param_1 + 0x18) = 0; // NOTE: Sets field at offset 0x18 to zero (likely i_ino?).
+  *(long *)(param_1 + 0x10) = lVar1 + 1; // NOTE: Sets field at offset 0x10 to 1 (likely i_state).
+  INIT_LIST_HEAD(param_1 + 8); // NOTE: Initializes list head at offset 8 (likely i_dentry).
+  INIT_HLIST_NODE(param_1 + 4); // NOTE: Initializes hash list node at offset 4 (likely i_hash).
+  inode_init_once(param_1); // NOTE: Calls external function for further inode initialization.
+  return;
+}"
+71,"/*
+* Function: init_once
+* Purpose: Initialize a newly allocated inode structure with default kernel object states.
+*/
+void init_once(long param_1)
+{
+  spin_lock_init(param_1 + 0x20);
+  *(undefined8 *)(param_1 + 0x18) = 0;
+  *(long *)(param_1 + 0x10) = FAT_CACHE_VALID + 1;
+  INIT_LIST_HEAD(param_1 + 8);
+  INIT_HLIST_NODE(param_1 + 4);
+  inode_init_once(param_1);
+  return;
+}","/*
+* Function: init_once
+* Purpose: Initialize a newly allocated inode structure with default kernel object states.
+*/
+void init_once(long param_1)
+{
+  spin_lock_init(param_1 + 0x20); // NOTE: 初始化位于偏移0x20处的自旋锁。
+  *(undefined8 *)(param_1 + 0x18) = 0; // NOTE: 将偏移0x18处的8字节内存清零。
+  *(long *)(param_1 + 0x10) = FAT_CACHE_VALID + 1; // NOTE: 在偏移0x10处设置一个长整型值。
+  INIT_LIST_HEAD(param_1 + 8); // NOTE: 初始化位于偏移8处的链表头。
+  INIT_HLIST_NODE(param_1 + 4); // NOTE: 初始化位于偏移4处的哈希链表节点。
+  inode_init_once(param_1); // NOTE: 调用另一个函数完成inode的初始化。
+  return;
+}"
+72,"/*
+* Function: init_once
+* Purpose: Initializes a raw memory block representing an inode structure with kernel-specific fields setup.
+*/
+void init_once(long param_1)
+{
+  long lVar1;
+  
+  spin_lock_init(param_1 + 0x20);
+  lVar1 = FAT_CACHE_VALID;
+  *(undefined8 *)(param_1 + 0x18) = 0;
+  *(long *)(param_1 + 0x10) = lVar1 + 1;
+  INIT_LIST_HEAD(param_1 + 8);
+  INIT_HLIST_NODE(param_1 + 4);
+  inode_init_once(param_1);
+  return;
+}","/*
+* Function: init_once
+* Purpose: Initializes a raw memory block representing an inode structure with kernel-specific fields setup.
+*/
+void init_once(long param_1) /* NOTE: param_1 is a base address for the inode memory block. */
+{
+  long lVar1;
+  
+  spin_lock_init(param_1 + 0x20); /* NOTE: Initializes a spinlock at offset 0x20 (likely i_lock). */
+  lVar1 = FAT_CACHE_VALID; /* NOTE: lVar1 holds a constant value from FAT_CACHE_VALID. */
+  *(undefined8 *)(param_1 + 0x18) = 0; /* NOTE: Sets 8-byte field at offset 0x18 to zero. */
+  *(long *)(param_1 + 0x10) = lVar1 + 1; /* NOTE: Stores (FAT_CACHE_VALID + 1) into field at offset 0x10. */
+  INIT_LIST_HEAD(param_1 + 8); /* NOTE: Initializes a list head at offset 8 (likely i_io_list). */
+  INIT_HLIST_NODE(param_1 + 4); /* NOTE: Initializes a hash list node at offset 4 (likely i_hash). */
+  inode_init_once(param_1); /* NOTE: Calls a more generic inode initialization function. */
+  return;
+}"
+73,"/*
+* Function: fpga_poweravgmgt1v2
+* Purpose: Retrieves the average FPGA power measurement for MGT12 from a measurement buffer.
+*/
+undefined8 fpga_power_avg_mgt_1v2(undefined8 param_1)
+{
+  long lVar1;
+  long *plVar2;
+  undefined8 uVar3;
+  undefined8 local_10;
+  
+  local_10 = param_1;
+  lVar1 = getMeasurement(&local_10,4);
+  if (lVar1 == 0) {
+    uVar3 = 0;
+  }
+  else {
+    plVar2 = (long *)getMeasurement(&local_10,4);
+    uVar3 = *(undefined8 *)(*plVar2 + MGT12 * 8);
+  }
+  return uVar3;
+}","/*
+* Function: fpga_poweravgmgt1v2
+* Purpose: Retrieves the average FPGA power measurement for MGT12 from a measurement buffer.
+*/
+undefined8 fpga_power_avg_mgt_1v2(undefined8 param_1)
+{
+  long lVar1;
+  long *plVar2;
+  undefined8 uVar3;
+  undefined8 local_10;
+  
+  local_10 = param_1; // NOTE: 保存输入参数到局部变量。
+  lVar1 = getMeasurement(&local_10,4); // NOTE: 第一次调用 getMeasurement，参数 '4' 含义不明。
+  if (lVar1 == 0) {
+    uVar3 = 0; // NOTE: 如果第一次调用失败，返回 0。
+  }
+  else {
+    plVar2 = (long *)getMeasurement(&local_10,4); // NOTE: 第二次调用 getMeasurement，可能返回空指针。
+    uVar3 = *(undefined8 *)(*plVar2 + MGT12 * 8); // NOTE: 从偏移量 MGT12 * 8 处读取数据。
+  }
+  return uVar3;
+}"
+74,"/*
+* Function: runInvOpc
+* Purpose: Initiates an inversion operation by calling a low-level hardware interface routine.
+*/
+void runInvOpc(void)
+{
+  raiseInvOp();
+  return;
+}","/*
+* Function: runInvOpc
+* Purpose: Initiates an inversion operation by calling a low-level hardware interface routine.
+* NOTE: This function directly triggers a hardware operation without any error checking or status verification.
+* NOTE: The `return` statement is redundant as the function has a `void` return type.
+*/
+void runInvOpc(void)
+{
+  raiseInvOp(); // NOTE: Calls low-level hardware routine. Consider adding error handling for operation failure.
+  return; // NOTE: Explicit return is unnecessary in a void function.
+}
+"
+75,"/*
+* Function: runInvOpc
+* Purpose: Initiates an inversion operation by triggering a hardware or system-level inversion command.
+*/
+void runInvOpc(void)
+{
+  raiseInvOp();
+  return;
+}","/*
+* Function: runInvOpc
+* Purpose: Initiates an inversion operation by triggering a hardware or system-level inversion command.
+* NOTE: This function directly triggers a hardware-level command. No error handling is performed if the command fails.
+* NOTE: The 'raiseInvOp' function is assumed to be a low-level system call. Its exact behavior and side effects are not documented here.
+*/
+void runInvOpc(void)
+{
+  raiseInvOp(); /* NOTE: Executes the hardware inversion command. The system state after this call is not validated. */
+  return; /* NOTE: Explicit return is redundant for a void function. */
+}"
+76,"/*
+* Function: fpga_poweravgmgt1v2
+* Purpose: Computes the average FPGA power value for a specific MGT (Multi-Gigabit Transceiver) channel by accessing-ing a pre-collected measurement buffer.
+*/
+undefined8 fpga_power_avg_mgt_1v2(undefined8 param_1)
+{
+  long lVar1;
+  long *plVar2;
+  undefined8 uVar3;
+  undefined8 local_10 [2];
+  
+  local_10[0] = param_1;
+  lVar1 = getMeasurement(local_10,4);
+  uVar3 = 0;
+  if (lVar1 != 0) {
+    plVar2 = (long *)getMeasurement(local_10,4);
+    uVar3 = *(undefined8 *)(*plVar2 + MGT12 * 8);
+  }
+  return uVar3;
+}","/*
+* Function: fpga_poweravgmgt1v2
+* Purpose: Computes the average FPGA power value for a specific MGT (Multi-Gigabit Transceiver) channel by accessing-ing a pre-collected measurement buffer.
+*/
+undefined8 fpga_power_avg_mgt_1v2(undefined8 param_1)
+{
+  long lVar1;
+  long *plVar2;
+  undefined8 uVar3;
+  undefined8 local_10 [2];
+  
+  local_10[0] = param_1; // NOTE: 初始化参数数组，param_1可能是上下文或句柄。
+  lVar1 = getMeasurement(local_10,4); // NOTE: 第一次调用getMeasurement，参数4可能表示测量类型或索引。
+  uVar3 = 0;
+  if (lVar1 != 0) {
+    plVar2 = (long *)getMeasurement(local_10,4); // NOTE: 重复调用getMeasurement，可能获取测量数据指针。
+    uVar3 = *(undefined8 *)(*plVar2 + MGT12 * 8); // NOTE: 从偏移量计算地址，MGT12可能是通道索引，8是字节偏移。
+  }
+  return uVar3; // NOTE: 返回计算出的功率值或0。
+}"
+77,"/*
+* Function: runInvOpc
+* Purpose: Initiates an inversion operation by triggering a hardware or system-level inversion command.
+*/
+void runInvOpc(void)
+
+{
+  raiseInvOp();
+  return;
+}","/*
+* Function: runInvOpc
+* Purpose: Initiates an inversion operation by triggering a hardware or system-level inversion command.
+* NOTE: 该函数是硬件反转操作的启动入口。
+*/
+void runInvOpc(void)
+
+{
+  raiseInvOp(); /* NOTE: 调用底层硬件操作函数。 */
+  return; /* NOTE: 显式返回，但在此上下文中是冗余的。 */
+}"
+78,"/*
+* Function: runInvOpc
+* Purpose: Triggers an invalid operation exception by calling raiseInvOp()
+*/
+void runInvOpc(void)
+{
+  raiseInvOp();
+  return;
+}","/*
+* Function: runInvOpc
+* Purpose: Triggers an invalid operation exception by calling raiseInvOp()
+* NOTE: 此函数专门用于触发无效操作异常，调用后程序可能进入错误状态。
+* NOTE: 函数名中的'InvOpc'与注释中的'invalid operation'存在缩写不一致。
+*/
+void runInvOpc(void)
+{
+  raiseInvOp(); /* NOTE: 调用此函数将立即引发异常。 */
+  return; /* NOTE: 此return语句在异常发生后可能无法执行。 */
+}"
+79,"/*
+* Function: fpga_power_avg_mgt_1v2
+* Purpose: Retrieves the average power value for MGT12 from an FPGA measurement buffer.
+*/
+undefined8 fpga_power_avg_mgt_1v2(undefined8 param_1)
+{
+  long lVar1;
+  long *plVar2;
+  undefined8 uVar3;
+  undefined8 local_10;
+  
+  local_10 = param_1;
+  lVar1 = getMeasurement(&local_10,4);
+  uVar3 = 0;
+  if (lVar1 != 0) {
+    plVar2 = (long *)getMeasurement(&local_10,4);
+    uVar3 = *(undefined8 *)(*plVar2 + MGT12 * 8);
+  }
+  return uVar3;
+}","/*
+* Function: fpga_power_avg_mgt_1v2
+* Purpose: Retrieves the average power value for MGT12 from an FPGA measurement buffer.
+*/
+undefined8 fpga_power_avg_mgt_1v2(undefined8 param_1) // NOTE: param_1 is likely a handle or context pointer.
+{
+  long lVar1;
+  long *plVar2;
+  undefined8 uVar3;
+  undefined8 local_10;
+  
+  local_10 = param_1;
+  lVar1 = getMeasurement(&local_10,4); // NOTE: First call to get measurement status or index.
+  uVar3 = 0;
+  if (lVar1 != 0) {
+    plVar2 = (long *)getMeasurement(&local_10,4); // NOTE: Second call may retrieve data buffer pointer.
+    uVar3 = *(undefined8 *)(*plVar2 + MGT12 * 8); // WARNING: Potential null dereference if plVar2 is null.
+  }
+  return uVar3;
+}"
+80,"/*
+* Function: fpga_power_avg_mgt_1v2
+* Purpose: Extracts the average power value for MGT12 from a hardware measurement structure.
+*/
+undefined8 fpga_power_avg_mgt_1v2(undefined8 param_1)
+{
+  long lVar1;
+  long *plVar2;
+  undefined8 uVar3;
+  undefined8 local_10;
+  
+  local_10 = param_1;
+  lVar1 = getMeasurement(&local_10,4);
+  uVar3 = 0;
+  if (lVar1 != 0) {
+    plVar2 = (long *)getMeasurement(&local_10,4);
+    uVar3 = *(undefined8 *)(*plVar2 + MGT12 * 8);
+  }
+  return uVar3;
+}","/*
+* Function: fpga_power_avg_mgt_1v2
+* Purpose: Extracts the average power value for MGT12 from a hardware measurement structure.
+*/
+undefined8 fpga_power_avg_mgt_1v2(undefined8 param_1) // NOTE: param_1 is likely a handle or context for the measurement.
+{
+  long lVar1;
+  long *plVar2;
+  undefined8 uVar3;
+  undefined8 local_10;
+  
+  local_10 = param_1; // NOTE: Copy parameter to local variable.
+  lVar1 = getMeasurement(&local_10,4); // NOTE: First call to get measurement data, '4' might be a measurement type ID.
+  uVar3 = 0; // NOTE: Default return value if measurement fails.
+  if (lVar1 != 0) { // NOTE: Check if the first measurement call succeeded.
+    plVar2 = (long *)getMeasurement(&local_10,4); // NOTE: Duplicate call; potential side effects or inconsistency.
+    uVar3 = *(undefined8 *)(*plVar2 + MGT12 * 8); // NOTE: Dereference pointer to access MGT12's power value at offset MGT12*8.
+  }
+  return uVar3; // NOTE: Returns the power value or 0.
+}"
+81,"/*
+* Function: test_fmaf
+* Purpose: Tests the consistency of fmaf() by invoking it twice and comparing internal register outputs.
+*/
+void test_fmaf(float param_1,float param_2,float param_3)
+{
+  long extraout_RAX;
+  long extraout_RAX_00;
+  
+  fmaf(param_1,param_2,param_3);
+  fmaf(param_1,param_2,param_3);
+  if (extraout_RAX != extraout_RAX_00) {
+    link_failure_fmaf();
+  }
+  return;
+}","/*
+* Function: test_fmaf
+* Purpose: Tests the consistency of fmaf() by invoking it twice and comparing internal register outputs.
+*/
+void test_fmaf(float param_1,float param_2,float param_3)
+{
+  long extraout_RAX; /* NOTE: 变量来源不明，疑似用于捕获fmaf的某种内部状态。 */
+  long extraout_RAX_00; /* NOTE: 同上，用于第二次调用的状态捕获。 */
+  
+  fmaf(param_1,param_2,param_3); /* NOTE: 第一次调用fmaf，但返回值被忽略。 */
+  fmaf(param_1,param_2,param_3); /* NOTE: 第二次调用fmaf，返回值同样被忽略。 */
+  if (extraout_RAX != extraout_RAX_00) { /* NOTE: 比较两次调用后未定义的变量，意图检测内部一致性。 */
+    link_failure_fmaf();
+  }
+  return;
+}"
+82,"/*
+* Function: test_fmaf
+* Purpose: Verifies consistency of fmaf() floating-point multiply-add results by invoking it twice and comparing internal register outputs.
+*/
+void test_fmaf(float param_1,float param_2,float param_3)
+{
+  long extraout_RAX;
+  long extraout_RAX_00;
+  
+  fmaf(param_1,param_2,param_3);
+  fmaf(param_1,param_2,param_3);
+  if (extraout_RAX != extraout_RAX_00) {
+    link_failure_fmaf();
+  }
+  return;
+}","/*
+* Function: test_fmaf
+* Purpose: Verifies consistency of fmaf() floating-point multiply-add results by invoking it twice and comparing internal register outputs.
+*/
+void test_fmaf(float param_1,float param_2,float param_3)
+{
+  long extraout_RAX; /* NOTE: 变量来源不明，疑似用于捕获 fmaf 的底层寄存器输出。 */
+  long extraout_RAX_00; /* NOTE: 同上，用于第二次调用的比较。 */
+  
+  fmaf(param_1,param_2,param_3); /* NOTE: 第一次调用 fmaf，可能通过副作用设置 extraout_RAX。 */
+  fmaf(param_1,param_2,param_3); /* NOTE: 第二次调用 fmaf，可能通过副作用设置 extraout_RAX_00。 */
+  if (extraout_RAX != extraout_RAX_00) { /* NOTE: 比较两次调用假设的内部状态，以检测不一致性。 */
+    link_failure_fmaf();
+  }
+  return;
+}"
+83,"/*
+* Function: test_fmaf
+* Purpose: Tests the consistency of the fmaf operation by invoking it twice and comparing internal register outputs.
+*/
+void test_fmaf(float param_1,float param_2,float param_3)
+{
+  long extraout_RAX;
+  long extraout_RAX_00;
+  
+  fmaf(param_1,param_2,param_3);
+  fmaf(param_1,param_2,param_3);
+  if (extraout_RAX == extraout_RAX_00) {
+    return;
+  }
+  link_failure_fmaf();
+  return;
+}","/*
+* Function: test_fmaf
+* Purpose: Tests the consistency of the fmaf operation by invoking it twice and comparing internal register outputs.
+*/
+void test_fmaf(float param_1,float param_2,float param_3)
+{
+  long extraout_RAX; /* NOTE: 变量来源不明，疑似应为fmaf的返回值或特定寄存器值。 */
+  long extraout_RAX_00; /* NOTE: 同上，用于与第一次调用结果比较。 */
+  
+  fmaf(param_1,param_2,param_3); /* NOTE: 第一次调用fmaf，但结果未保存。 */
+  fmaf(param_1,param_2,param_3); /* NOTE: 第二次调用fmaf，结果同样未保存。 */
+  if (extraout_RAX == extraout_RAX_00) { /* NOTE: 比较两个未初始化的变量，逻辑无效。 */
+    return;
+  }
+  link_failure_fmaf(); /* NOTE: 疑似在检测到不一致时调用的错误处理函数。 */
+  return;
+}"
+84,"/*
+* Function: get_region_name_BT
+* Purpose: Maps a numeric region code to its corresponding region name string in Bhutan.
+*/
+char * get_region_name_BT(undefined4 param_1)
+{
+  switch(param_1) {
+  case 5:
+    return ""Bumthang"";
+  case 6:
+    return ""Chhukha"";
+  case 7:
+    return ""Chirang"";
+  case 8:
+    return ""Daga"";
+  case 9:
+    return ""Geylegphug"";
+  case 10:
+    return ""Ha"";
+  case 0xb:
+    return ""Lhuntshi"";
+  case 0xc:
+    return ""Mongar"";
+  case 0xd:
+    return ""Paro"";
+  case 0xe:
+    return ""Pemagatsel"";
+  case 0xf:
+    return ""Punakha"";
+  case 0x10:
+    return ""Samchi"";
+  case 0x11:
+    return ""Samdrup"";
+  case 0x12:
+    return ""Shemgang"";
+  case 0x13:
+    return ""Tashigang"";
+  case 0x14:
+    return ""Thimphu"";
+  case 0x15:
+    return ""Tongsa"";
+  case 0x16:
+    return ""Wangdi Phodrang"";
+  default:
+    return (char *)0x0;
+  }
+}","/*
+* Function: get_region_name_BT
+* Purpose: Maps a numeric region code to its corresponding region name string in Bhutan.
+*/
+char * get_region_name_BT(undefined4 param_1)
+{
+  switch(param_1) {
+  case 5:
+    return ""Bumthang"";
+  case 6:
+    return ""Chhukha"";
+  case 7:
+    return ""Chirang"";
+  case 8:
+    return ""Daga"";
+  case 9:
+    return ""Geylegphug"";
+  case 10:
+    return ""Ha"";
+  case 0xb: // NOTE: Region code 11
+    return ""Lhuntshi"";
+  case 0xc: // NOTE: Region code 12
+    return ""Mongar"";
+  case 0xd: // NOTE: Region code 13
+    return ""Paro"";
+  case 0xe: // NOTE: Region code 14
+    return ""Pemagatsel"";
+  case 0xf: // NOTE: Region code 15
+    return ""Punakha"";
+  case 0x10: // NOTE: Region code 16
+    return ""Samchi"";
+  case 0x11: // NOTE: Region code 17
+    return ""Samdrup"";
+  case 0x12: // NOTE: Region code 18
+    return ""Shemgang"";
+  case 0x13: // NOTE: Region code 19
+    return ""Tashigang"";
+  case 0x14: // NOTE: Region code 20
+    return ""Thimphu"";
+  case 0x15: // NOTE: Region code 21
+    return ""Tongsa"";
+  case 0x16: // NOTE: Region code 22
+    return ""Wangdi Phodrang"";
+  default:
+    return (char *)0x0; // NOTE: Returns NULL for invalid region code. Caller must check.
+  }
+}"
+85,"/*
+* Function: test_fmaf
+* Purpose: Tests the consistency of repeated fmaf() invocations by comparing their side-effect registers.
+*/
+void test_fmaf(float param_1,float param_2,float param_3)
+{
+  long extraout_RAX;
+  long extraout_RAX_00;
+  
+  fmaf(param_1,param_2,param_3);
+  fmaf(param_1,param_2,param_3);
+  if (extraout_RAX == extraout_RAX_00) {
+    return;
+  }
+  link_failure_fmaf;
+  return;
+}","/*
+* Function: test_fmaf
+* Purpose: Tests the consistency of repeated fmaf() invocations by comparing their side-effect registers.
+*/
+void test_fmaf(float param_1,float param_2,float param_3)
+{
+  long extraout_RAX; /* NOTE: 变量未初始化，其预期来源（如寄存器）不明确。 */
+  long extraout_RAX_00; /* NOTE: 变量未初始化，其预期来源（如寄存器）不明确。 */
+  
+  fmaf(param_1,param_2,param_3);
+  fmaf(param_1,param_2,param_3);
+  if (extraout_RAX == extraout_RAX_00) { /* NOTE: 比较两个未定义的变量，逻辑无效。 */
+    return;
+  }
+  link_failure_fmaf; /* NOTE: 未定义的标识符，导致死代码。 */
+  return;
+}"
+86,"/*
+* Function: t174_3mul
+* Purpose: Computes the product of -1 (0xffffffffffffffff) and input param_1 using overflow-checked multiplication.
+*/
+undefined8 t174_3mul(undefined8 param_1)
+{
+  long lVar1;
+  long in_FS_OFFSET;
+  undefined8 local_18;
+  long local_10;
+  
+  local_10 = *(long *)(in_FS_OFFSET + 0x28);
+  lVar1 = __builtin_mul_overflow(0xffffffffffffffff,param_1,&local_18);
+  if (lVar1 != 0) {
+    bar();
+  }
+  if (local_10 != *(long *)(in_FS_OFFSET + 0x28)) {
+                    
+    __stack_chkfail();
+  }
+  return local_18;
+}","/*
+* Function: t174_3mul
+* Purpose: Computes the product of -1 (0xffffffffffffffff) and input param_1 using overflow-checked multiplication.
+*/
+undefined8 t174_3mul(undefined8 param_1)
+{
+  long lVar1;
+  long in_FS_OFFSET;
+  undefined8 local_18;
+  long local_10;
+  
+  local_10 = *(long *)(in_FS_OFFSET + 0x28); // NOTE: 读取栈保护金丝雀值
+  lVar1 = __builtin_mul_overflow(0xffffffffffffffff,param_1,&local_18); // NOTE: 执行溢出检查的乘法，乘数为-1
+  if (lVar1 != 0) { // NOTE: 如果乘法溢出，则调用bar()
+    bar();
+  }
+  if (local_10 != *(long *)(in_FS_OFFSET + 0x28)) { // NOTE: 检查栈保护金丝雀值是否被破坏
+                    
+    __stack_chkfail();
+  }
+  return local_18; // NOTE: 返回乘法结果
+}"
+87,"/*
+* Function: t174_3mul
+* Purpose: Computes the product of -1 and a 64-bit input value using overflow-safe multiplication.
+*/
+undefined8 t174_3mul(undefined8 param_1)
+{
+  long lVar1;
+  long in_FS_OFFSET;
+  undefined8 local_18;
+  long local_10;
+  
+  local_10 = *(long *)(in_FS_OFFSET + 0x28);
+  lVar1 = __builtin_mul_overflow(0xffffffffffffffff,param_1,&local_18);
+  if (lVar1 != 0) {
+    bar();
+  }
+  if (local_10 == *(long *)(in_FS_OFFSET + 0x28)) {
+    return local_18;
+  }
+                    
+  __stackchkfail();
+}","/*
+* Function: t174_3mul
+* Purpose: Computes the product of -1 and a 64-bit input value using overflow-safe multiplication.
+*/
+undefined8 t174_3mul(undefined8 param_1) // NOTE: param_1 is the 64-bit input value to be multiplied by -1.
+{
+  long lVar1;
+  long in_FS_OFFSET;
+  undefined8 local_18;
+  long local_10;
+  
+  local_10 = *(long *)(in_FS_OFFSET + 0x28); // NOTE: Stack canary for overflow protection.
+  lVar1 = __builtin_mul_overflow(0xffffffffffffffff,param_1,&local_18); // NOTE: Multiplies -1 (two's complement) by param_1, storing result in local_18. lVar1 is non-zero on overflow.
+  if (lVar1 != 0) {
+    bar(); // NOTE: Calls error handler if multiplication overflowed.
+  }
+  if (local_10 == *(long *)(in_FS_OFFSET + 0x28)) {
+    return local_18; // NOTE: Returns the product if no stack corruption detected.
+  }
+                    
+  __stackchkfail(); // NOTE: Triggers stack check failure if canary was modified.
+}"
+88,"/*
+* Function: t174_3mul
+* Purpose: Computes the product of -1 and param_1 using overflow-checked multiplication.
+*/
+undefined8 t174_3mul(undefined8 param_1)
+{
+  long lVar1;
+  long in_FS_OFFSET;
+  undefined8 local_18;
+  long local_10;
+  
+  local_10 = *(long *)(in_FS_OFFSET + 0x28);
+  lVar1 = __builtin_mul_overflow(0xffffffffffffffff,param_1,&local_18);
+  if (lVar1 != 0) {
+    bar();
+  }
+  if (local_10 == *(long *)(in_FS_OFFSET + 0x28)) {
+    return local_18;
+  }
+                    
+  __stackchkfail();
+}","/*
+* Function: t174_3mul
+* Purpose: Computes the product of -1 and param_1 using overflow-checked multiplication.
+*/
+undefined8 t174_3mul(undefined8 param_1)
+{
+  long lVar1;
+  long in_FS_OFFSET;
+  undefined8 local_18;
+  long local_10;
+  
+  local_10 = *(long *)(in_FS_OFFSET + 0x28); // NOTE: 加载栈保护金丝雀值
+  lVar1 = __builtin_mul_overflow(0xffffffffffffffff,param_1,&local_18); // NOTE: 计算 -1 * param_1，检查溢出
+  if (lVar1 != 0) { // NOTE: 如果发生溢出，则调用错误处理函数
+    bar();
+  }
+  if (local_10 == *(long *)(in_FS_OFFSET + 0x28)) { // NOTE: 验证栈保护金丝雀值是否被破坏
+    return local_18; // NOTE: 返回乘法结果
+  }
+                    
+  __stackchkfail(); // NOTE: 栈保护失败，终止程序
+}
+"
+89,"/*
+* Function: main
+* Purpose: Reads two floating-point numbers from user input, adds them together, and prints the result.
+*/
+undefined8 main(void)
+
+{
+  long in_FS_OFFSET;
+  float local_18;
+  float local_14;
+  long local_10;
+  
+  local_10 = *(long *)(in_FS_OFFSET + 0x28);
+  printf(""digite um numero : "");
+  scanf(""%f"",&local_18);
+  printf(""digite outro numero : "");
+  scanf(""%f"",&local_14);
+  local_18 = local_14 + local_18;
+  printf(""%0.2f"",(double)local_18);
+  getch();
+  if (local_10 != *(long *)(in_FS_OFFSET + 0x28)) {
+                    
+    __stack_chk_fail();
+  }
+  return 0;
+}","/*
+* Function: main
+* Purpose: Reads two floating-point numbers from user input, adds them together, and prints the result.
+*/
+undefined8 main(void)
+
+{
+  long in_FS_OFFSET;
+  float local_18; /* NOTE: 存储第一个输入的数字 */
+  float local_14; /* NOTE: 存储第二个输入的数字 */
+  long local_10; /* NOTE: 栈保护金丝雀值 */
+  
+  local_10 = *(long *)(in_FS_OFFSET + 0x28); /* NOTE: 加载栈保护金丝雀值 */
+  printf(""digite um numero : "");
+  scanf(""%f"",&local_18); /* NOTE: 读取第一个浮点数，未检查返回值 */
+  printf(""digite outro numero : "");
+  scanf(""%f"",&local_14); /* NOTE: 读取第二个浮点数，未检查返回值 */
+  local_18 = local_14 + local_18; /* NOTE: 将两数之和存回第一个变量 */
+  printf(""%0.2f"",(double)local_18);
+  getch(); /* NOTE: 等待按键，程序暂停 */
+  if (local_10 != *(long *)(in_FS_OFFSET + 0x28)) { /* NOTE: 检查栈保护金丝雀值是否被破坏 */
+                    
+    __stack_chk_fail();
+  }
+  return 0;
+}"
+90,"/*
+* Function: t174_3mul
+* Purpose: Computes the product of -1 (0xffffffffffffffff) and input param_1 using overflow-checked multiplication.
+*/
+undefined8 t174_3mul(undefined8 param_1)
+{
+  long lVar1;
+  long in_FS_OFFSET;
+  undefined8 local_18;
+  long local_10;
+  
+  local_10 = *(long *)(in_FS_OFFSET + 0x28);
+  lVar1 = __builtin_mul_overflow(0xffffffffffffffff,param_1,&local_18);
+  if (lVar1 != 0) {
+    bar();
+  }
+  if (local_10 == *(long *)(in_FS_OFFSET + 0x28)) {
+    return local_18;
+  }
+                    
+  __stackchkfail();
+}","/*
+* Function: t174_3mul
+* Purpose: Computes the product of -1 (0xffffffffffffffff) and input param_1 using overflow-checked multiplication.
+*/
+undefined8 t174_3mul(undefined8 param_1)
+{
+  long lVar1; // NOTE: 溢出标志，非零表示乘法溢出。
+  long in_FS_OFFSET;
+  undefined8 local_18; // NOTE: 存储乘法结果的变量。
+  long local_10;
+  
+  local_10 = *(long *)(in_FS_OFFSET + 0x28);
+  lVar1 = __builtin_mul_overflow(0xffffffffffffffff,param_1,&local_18); // NOTE: 计算-1 * param_1，检查溢出。
+  if (lVar1 != 0) {
+    bar(); // NOTE: 乘法溢出时调用错误处理函数。
+  }
+  if (local_10 == *(long *)(in_FS_OFFSET + 0x28)) {
+    return local_18;
+  }
+                    
+  __stackchkfail();
+}
+"
+91,"/*
+* Function: main
+* Purpose: Reads two floating-point numbers from user input, computes their sum, and displays the result.
+*/
+undefined8 main(void)
+
+{
+  long in_FS_OFFSET;
+  float local_18;
+  float local_14;
+  long local_10;
+  
+  local_10 = *(long *)(in_FS_OFFSET + 0x28);
+  printf(""digite um numero : "");
+  scanf(""%f"",&local_18);
+  printf(""digite outro numero : "");
+  scanf(""%f"",&local_14);
+  local_18 = local_18 + local_14;
+  printf(""%0.2f"",(double)local_18);
+  getch();
+  if (local_10 == *(long *)(in_FS_OFFSET + 0x28)) {
+    return 0;
+  }
+                    
+  __stack_chk_fail();
+}","/*
+* Function: main
+* Purpose: Reads two floating-point numbers from user input, computes their sum, and displays the result.
+*/
+undefined8 main(void)
+
+{
+  long in_FS_OFFSET;
+  float local_18; /* NOTE: 存储第一个输入数字 */
+  float local_14; /* NOTE: 存储第二个输入数字 */
+  long local_10; /* NOTE: 栈保护金丝雀值 */
+  
+  local_10 = *(long *)(in_FS_OFFSET + 0x28); /* NOTE: 从线程本地存储加载栈保护金丝雀 */
+  printf(""digite um numero : ""); /* NOTE: 葡萄牙语提示输入第一个数字 */
+  scanf(""%f"",&local_18); /* NOTE: 读取第一个浮点数，未检查返回值 */
+  printf(""digite outro numero : ""); /* NOTE: 葡萄牙语提示输入另一个数字 */
+  scanf(""%f"",&local_14); /* NOTE: 读取第二个浮点数，未检查返回值 */
+  local_18 = local_18 + local_14; /* NOTE: 将和存储回第一个变量 */
+  printf(""%0.2f"",(double)local_18); /* NOTE: 打印结果，保留两位小数 */
+  getch(); /* NOTE: 等待按键（非标准函数） */
+  if (local_10 == *(long *)(in_FS_OFFSET + 0x28)) { /* NOTE: 比较栈保护金丝雀是否被修改 */
+    return 0;
+  }
+                    
+  __stack_chk_fail(); /* NOTE: 栈保护失败处理函数 */
+}"
+92,"/*
+* Function: wirth_median
+* Purpose: Compute the median of an array using kth-smallest selection, handling both even and odd lengths.
+*/
+double wirth_median(undefined8 param_1,uint param_2)
+
+{
+  double dVar1;
+  double dVar2;
+  
+  if ((param_2 & 1) == 0) {
+    dVar1 = (double)kth_smallest(param_1,param_2,(int)param_2 / 2);
+    dVar2 = (double)kthsmallest(param_1,param_2,(int)param_2 / 2 + -1);
+    dVar1 = DAT_001000a0 * (dVar1 + dVar2);
+  }
+  else {
+    dVar1 = (double)kthsmallest(param_1,param_2,(int)(param_2 - 1) / 2);
+  }
+  return dVar1;
+}","/*
+* Function: wirth_median
+* Purpose: Compute the median of an array using kth-smallest selection, handling both even and odd lengths.
+*/
+double wirth_median(undefined8 param_1,uint param_2)
+
+{
+  double dVar1;
+  double dVar2;
+  
+  if ((param_2 & 1) == 0) {
+    dVar1 = (double)kth_smallest(param_1,param_2,(int)param_2 / 2); /* NOTE: 调用 kth_smallest 获取中间偏右元素。 */
+    dVar2 = (double)kthsmallest(param_1,param_2,(int)param_2 / 2 + -1); /* NOTE: 调用 kthsmallest 获取中间偏左元素，注意函数名拼写不一致。 */
+    dVar1 = DAT_001000a0 * (dVar1 + dVar2); /* NOTE: 使用常量 DAT_001000a0 计算偶数长度中值的平均值。 */
+  }
+  else {
+    dVar1 = (double)kthsmallest(param_1,param_2,(int)(param_2 - 1) / 2); /* NOTE: 奇数长度时直接获取中位数元素。 */
+  }
+  return dVar1;
+}"
+93,"/*
+* Function: fb_hStr2ULongint
+* Purpose: Converts a string representation of a number to an unsigned 64-bit integer, supporting optional base prefixes (0b, 0o, 0x).
+*/
+ulonglong fb_hStr2ULongint(undefined8 param_1,int param_2)
+{
+  ulonglong uVar1;
+  int local_18;
+  int local_14;
+  char *local_10;
+  
+  local_10 = (char *)fb_hStrSkipChar(param_1,param_2,0x20);
+  param_2 = param_2 - ((int)local_10 - (int)param_1);
+  if (param_2 < 1) {
+    uVar1 = 0;
+  }
+  else {
+    local_18 = 10;
+    if ((1 < param_2) && (*local_10 == '&')) {
+      local_14 = 2;
+      switch(local_10[1]) {
+      case 'B':
+      case 'b':
+        local_18 = 2;
+        break;
+      default:
+        local_18 = 8;
+        local_14 = 1;
+        break;
+      case 'H':
+      case 'h':
+        local_18 = 0x10;
+        break;
+      case 'O':
+      case 'o':
+        local_18 = 8;
+      }
+      if (local_18 != 10) {
+        local_10 = local_10 + local_14;
+      }
+    }
+    uVar1 = strtoull(local_10,(char **)0x0,local_18);
+  }
+  return uVar1;
+}","/*
+* Function: fb_hStr2ULongint
+* Purpose: Converts a string representation of a number to an unsigned 64-bit integer, supporting optional base prefixes (0b, 0o, 0x).
+*/
+ulonglong fb_hStr2ULongint(undefined8 param_1,int param_2)
+{
+  ulonglong uVar1;
+  int local_18;
+  int local_14;
+  char *local_10;
+  
+  local_10 = (char *)fb_hStrSkipChar(param_1,param_2,0x20);
+  param_2 = param_2 - ((int)local_10 - (int)param_1); /* NOTE: 计算跳过空格后的剩余字符串长度。指针减法可能产生负值。 */
+  if (param_2 < 1) {
+    uVar1 = 0;
+  }
+  else {
+    local_18 = 10; /* NOTE: 默认十进制基数。 */
+    if ((1 < param_2) && (*local_10 == '&')) {
+      local_14 = 2;
+      switch(local_10[1]) {
+      case 'B':
+      case 'b':
+        local_18 = 2; /* NOTE: 二进制前缀 &b 或 &B。 */
+        break;
+      default:
+        local_18 = 8; /* NOTE: 默认将 & 后跟未知字符视为八进制。 */
+        local_14 = 1;
+        break;
+      case 'H':
+      case 'h':
+        local_18 = 0x10; /* NOTE: 十六进制前缀 &h 或 &H。 */
+        break;
+      case 'O':
+      case 'o':
+        local_18 = 8; /* NOTE: 八进制前缀 &o 或 &O。 */
+      }
+      if (local_18 != 10) {
+        local_10 = local_10 + local_14; /* NOTE: 跳过前缀字符。 */
+      }
+    }
+    uVar1 = strtoull(local_10,(char **)0x0,local_18); /* NOTE: 调用标准库进行转换，未检查错误。 */
+  }
+  return uVar1;
+}"
+94,"/*
+* Function: fb_hStr2ULongint
+* Purpose: Converts a string representation of a number (with optional base prefix) to an unsigned 64-bit integer.
+*/
+ulonglong fb_hStr2ULongint(undefined8 param_1,undefined8 param_2)
+{
+  char *__nptr;
+  ulonglong uVar1;
+  long lVar2;
+  int iVar3;
+  
+  __nptr = (char *)fb_hStrSkipChar(param_1,param_2,0x20);
+  iVar3 = (int)param_2 - ((int)__nptr - (int)param_1);
+  if (iVar3 < 1) {
+    return 0;
+  }
+  if ((iVar3 != 1) && (*__nptr == '&'))) {
+    switch(__nptr[1]) {
+    case 'B':
+    lVar2 = 2;
+    iVar3 = 2;
+    break;
+    default:
+    lVar2 = 1;
+    iVar3 = 8;
+    break;
+    case 'H':
+    lVar2 = 2;
+    iVar3 = 0x10;
+    break;
+    case 'O':
+    lVar2 = 2;
+    iVar3 = 8;
+    }
+    uVar1 = strtoull(__nptr + lVar2,(char **)0x0,iVar3);
+    return uVar1;
+  }
+  uVar1 = strtoull(__nptr,(char **)0x0,10);
+  return uVar1;
+}","/*
+* Function: fb_hStr2ULongint
+* Purpose: Converts a string representation of a number (with optional base prefix) to an unsigned 64-bit integer.
+*/
+ulonglong fb_hStr2ULongint(undefined8 param_1,undefined8 param_2)
+{
+  char *__nptr;
+  ulonglong uVar1;
+  long lVar2;
+  int iVar3;
+  
+  __nptr = (char *)fb_hStrSkipChar(param_1,param_2,0x20); /* NOTE: 0x20 is ASCII space, skip leading spaces. */
+  iVar3 = (int)param_2 - ((int)__nptr - (int)param_1); /* NOTE: Calculate remaining string length after skipping spaces. */
+  if (iVar3 < 1) {
+    return 0; /* NOTE: Empty or whitespace-only string returns 0. */
+  }
+  if ((iVar3 != 1) && (*__nptr == '&'))) { /* NOTE: Syntax error: extra ')'. Check for base prefix like &H, &O, &B. */
+    switch(__nptr[1]) {
+    case 'B':
+    lVar2 = 2; /* NOTE: Base prefix length for binary (&B). */
+    iVar3 = 2; /* NOTE: Base 2 for binary. */
+    break;
+    default:
+    lVar2 = 1; /* NOTE: Default prefix length? Logic unclear. */
+    iVar3 = 8; /* NOTE: Default base 8? This seems inconsistent. */
+    break;
+    case 'H':
+    lVar2 = 2; /* NOTE: Base prefix length for hexadecimal (&H). */
+    iVar3 = 0x10; /* NOTE: Base 16 for hexadecimal. */
+    break;
+    case 'O':
+    lVar2 = 2; /* NOTE: Base prefix length for octal (&O). */
+    iVar3 = 8; /* NOTE: Base 8 for octal. */
+    }
+    uVar1 = strtoull(__nptr + lVar2,(char **)0x0,iVar3); /* NOTE: Convert numeric part after prefix. Error return not checked. */
+    return uVar1;
+  }
+  uVar1 = strtoull(__nptr,(char **)0x0,10); /* NOTE: Default decimal conversion. Error return not checked. */
+  return uVar1;
+}"
+95,"/*
+* Function: wirth_median
+* Purpose: Computes the median of an array using low-level bitwise and memory operations.
+*/
+double wirth_median(undefined8 param_1,uint param_2)
+{
+  double dVar1;
+  double dVar2;
+  
+  if ((param_2 & 1) == 0) {
+    dVar1 = (double)kth_smallest(param_1,param_2,(int)param_2 / 2);
+    dVar2 = (double)kth_smallest(param_1,param_2,(int)param_2 / 2 + -1);
+    return (dVar2 + dVar1) * __LC0;
+  }
+  dVar1 = (double)kth_smallest(param_1,param_2,(int)(param_2 - 1) / 2);
+  return dVar1;
+}","/*
+* Function: wirth_median
+* Purpose: Computes the median of an array using low-level bitwise and memory operations.
+*/
+double wirth_median(undefined8 param_1,uint param_2)
+{
+  double dVar1;
+  double dVar2;
+  
+  if ((param_2 & 1) == 0) {
+    dVar1 = (double)kth_smallest(param_1,param_2,(int)param_2 / 2); // NOTE: 偶数个元素时，取中间两个较小者的平均值。
+    dVar2 = (double)kth_smallest(param_1,param_2,(int)param_2 / 2 + -1); // NOTE: 获取另一个中间值。
+    return (dVar2 + dVar1) * __LC0; // NOTE: 使用常量__LC0进行缩放（可能为0.5）。
+  }
+  dVar1 = (double)kth_smallest(param_1,param_2,(int)(param_2 - 1) / 2); // NOTE: 奇数个元素时，直接取中位数。
+  return dVar1;
+}"
+96,"/*
+* Function: wirth_median
+* Purpose: Computes the median of an array using a k-th smallest algorithm with bitwise and pointer-based indexing.
+*/
+double wirth_median(undefined8 param_1, ulong param_2)
+{
+  int iVar1;
+  double dVar2;
+  double dVar3;
+  
+  if ((param_2 & 1) == 0) {
+    iVar1 = (int)(((uint)(param_2 >> 0x1f) & 1) + (int)param_2) >> 1;
+    dVar2 = (double)kth_smallest(param_1,param_2,iVar1);
+    dVar3 = (double)kth_smallest(param_1,param_2 & 0xffffffff,iVar1 + -1);
+    dVar2 = (dVar3 + dVar2) * __LC0;
+  }
+  else {
+    dVar2 = (double)kth_smallest(param_1,param_2,((int)param_2 + -1) / 2);
+  }
+  return dVar2;
+}","/*
+* Function: wirth_median
+* Purpose: Computes the median of an array using a k-th smallest algorithm with bitwise and pointer-based indexing.
+*/
+double wirth_median(undefined8 param_1, ulong param_2)
+{
+  int iVar1;
+  double dVar2;
+  double dVar3;
+  
+  if ((param_2 & 1) == 0) {
+    iVar1 = (int)(((uint)(param_2 >> 0x1f) & 1) + (int)param_2) >> 1; // NOTE: 计算偶数长度时中间偏右的索引，逻辑复杂。
+    dVar2 = (double)kth_smallest(param_1,param_2,iVar1); // NOTE: 查找第iVar1小的元素。
+    dVar3 = (double)kth_smallest(param_1,param_2 & 0xffffffff,iVar1 + -1); // NOTE: 查找第iVar1-1小的元素，用于计算两个中间值的平均值。
+    dVar2 = (dVar3 + dVar2) * __LC0; // NOTE: __LC0 可能是 0.5，用于计算平均值。
+  }
+  else {
+    dVar2 = (double)kth_smallest(param_1,param_2,((int)param_2 + -1) / 2); // NOTE: 奇数长度时，直接查找中间索引的元素。
+  }
+  return dVar2;
+}"
+97,"/*
+* Function: fb_hStr2ULongint
+* Purpose: Convert a string representation of a number to an unsigned 64-bit integer.
+*/
+ulonglong fb_hStr2ULongint(undefined8 param_1,undefined8 param_2)
+{
+  char *__nptr;
+  ulonglong uVar1;
+  int __base;
+  int iVar2;
+  
+  __nptr = (char *)fb_hStrSkipChar(param_1,param_2,0x20);
+  iVar2 = (int)param_2 - ((int)__nptr - (int)param_1);
+  uVar1 = 0;
+  if (0 < iVar2) {
+    __base = 10;
+    if ((1 < iVar2) && (*__nptr == '&')) {
+      switch(__nptr[1]) {
+      case 'B':
+      case 'b':
+        iVar2 = 2;
+        __base = 2;
+        break;
+      default:
+        iVar2 = 1;
+        __base = 8;
+        break;
+      case 'H':
+      case 'h':
+        iVar2 = 2;
+        __base = 0x10;
+        break;
+      case 'O':
+      case 'o':
+        iVar2 = 2;
+        __base = 8;
+      }
+      __nptr = __nptr + iVar2;
+    }
+    uVar1 = strtoull(__nptr,(char **)0x0,__base);
+  }
+  return uVar1;
+}","/*
+* Function: fb_hStr2ULongint
+* Purpose: Convert a string representation of a number to an unsigned 64-bit integer.
+*/
+ulonglong fb_hStr2ULongint(undefined8 param_1,undefined8 param_2)
+{
+  char *__nptr;
+  ulonglong uVar1;
+  int __base;
+  int iVar2;
+  
+  __nptr = (char *)fb_hStrSkipChar(param_1,param_2,0x20); /* NOTE: 跳过前导空格字符(ASCII 0x20) */
+  iVar2 = (int)param_2 - ((int)__nptr - (int)param_1); /* NOTE: 计算跳过空格后剩余字符串的长度 */
+  uVar1 = 0;
+  if (0 < iVar2) {
+    __base = 10; /* NOTE: 默认十进制基数 */
+    if ((1 < iVar2) && (*__nptr == '&')) { /* NOTE: 检查是否有基数前缀(以'&'开头) */
+      switch(__nptr[1]) {
+      case 'B':
+      case 'b':
+        iVar2 = 2; /* NOTE: 前缀长度为2 */
+        __base = 2; /* NOTE: 二进制 */
+        break;
+      default:
+        iVar2 = 1; /* NOTE: 默认前缀长度为1(仅'&') */
+        __base = 8; /* NOTE: 默认八进制 */
+        break;
+      case 'H':
+      case 'h':
+        iVar2 = 2;
+        __base = 0x10; /* NOTE: 十六进制 */
+        break;
+      case 'O':
+      case 'o':
+        iVar2 = 2;
+        __base = 8; /* NOTE: 八进制 */
+      }
+      __nptr = __nptr + iVar2; /* NOTE: 移动指针，跳过基数前缀 */
+    }
+    uVar1 = strtoull(__nptr,(char **)0x0,__base); /* NOTE: 调用标准库函数进行转换，未检查错误 */
+  }
+  return uVar1;
+}"
+98,"/*
+* Function: gdev_prn_copy_scan_lines
+* Purpose: Copies scan lines from a printer device buffer to a target location by iterating through raster lines.
+*/
+int gdev_prn_copy_scan_lines(int *param_1,int param_2,long param_3,int param_4)
+{
+  int iVar1;
+  int iVar2;
+  int iVar3;
+  int local_20;
+  long local_10;
+  
+  iVar1 = gx_device_raster(param_1,0);
+  iVar2 = *param_1 - param_2;
+  if (param_4 / iVar1 <= *param_1 - param_2) {
+    iVar2 = param_4 / iVar1;
+  }
+  local_20 = 0;
+  local_10 = param_3;
+  while ((iVar3 = iVar2, local_20 < iVar2 &&
+         (iVar3 = gdev_prn_get_bits(param_1,param_2 + local_20,local_10,0), -1 < iVar3))) {
+    local_20 = local_20 + 1;
+    local_10 = local_10 + (long)iVar1 * 4;
+  }
+  return iVar3;
+}","/*
+* Function: gdev_prn_copy_scan_lines
+* Purpose: Copies scan lines from a printer device buffer to a target location by iterating through raster lines.
+*/
+int gdev_prn_copy_scan_lines(int *param_1,int param_2,long param_3,int param_4)
+{
+  int iVar1;
+  int iVar2;
+  int iVar3;
+  int local_20;
+  long local_10;
+  
+  iVar1 = gx_device_raster(param_1,0); /* NOTE: 获取设备光栅宽度，可能为零。 */
+  iVar2 = *param_1 - param_2; /* NOTE: 计算初始的最大行数限制。 */
+  if (param_4 / iVar1 <= *param_1 - param_2) { /* NOTE: 基于总字节数计算可复制的最大行数。 */
+    iVar2 = param_4 / iVar1; /* NOTE: 更新实际要复制的行数。 */
+  }
+  local_20 = 0; /* NOTE: 已成功复制的行数计数器。 */
+  local_10 = param_3; /* NOTE: 目标缓冲区的当前写入位置。 */
+  while ((iVar3 = iVar2, local_20 < iVar2 && /* NOTE: 循环条件：检查计数器并预存iVar2。 */
+         (iVar3 = gdev_prn_get_bits(param_1,param_2 + local_20,local_10,0), -1 < iVar3))) { /* NOTE: 调用底层函数复制一行，并检查其返回值。 */
+    local_20 = local_20 + 1; /* NOTE: 成功复制一行，计数器递增。 */
+    local_10 = local_10 + (long)iVar1 * 4; /* NOTE: 根据光栅宽度移动目标缓冲区指针。 */
+  }
+  return iVar3; /* NOTE: 返回最后一次gdev_prn_get_bits的调用结果或循环前的iVar2。 */
+}"
+99,"/*
+* Function: gdev_prn_copy_scan_lines
+* Purpose: Copies a sequence of scan lines from a printer device's raster buffer to an output destination.
+*/
+ulong gdev_prn_copy_scan_lines(int *param_1,int param_2,long param_3,int param_4)
+{
+  int iVar1;
+  uint uVar2;
+  int iVar3;
+  ulong uVar4;
+  
+  iVar1 = eax_device_raster(param_1,0);
+  uVar4 = (ulong)(uint)(*param_1 - param_2);
+  if ((int)((long)param_4 / (long)iVar1) < *param_1 - param_2) {
+    uVar4 = (long)param_4 / (long)iVar1 & 0xffffffff;
+  }
+  if (0 < (int)uVar4) {
+    iVar3 = param_2 + (int)uVar4;
+    do {
+      uVar2 = gdev_prn_get_bits(param_1,param_2,param_3,0);
+      if ((int)uVar2 < 0) {
+        return (ulong)uVar2;
+      }
+      param_3 = param_3 + (long)iVar1 * 4;
+      param_2 = param_2 + 1;
+    } while (param_2 != iVar3);
+  }
+  return uVar4;
+}","/*
+* Function: gdev_prn_copy_scan_lines
+* Purpose: Copies a sequence of scan lines from a printer device's raster buffer to an output destination.
+*/
+ulong gdev_prn_copy_scan_lines(int *param_1,int param_2,long param_3,int param_4)
+{
+  int iVar1;
+  uint uVar2;
+  int iVar3;
+  ulong uVar4;
+  
+  iVar1 = eax_device_raster(param_1,0); /* NOTE: 获取设备光栅参数，可能为每行字节数或宽度 */
+  uVar4 = (ulong)(uint)(*param_1 - param_2); /* NOTE: 计算理论可复制的最大行数，基于起始偏移 */
+  if ((int)((long)param_4 / (long)iVar1) < *param_1 - param_2) { /* NOTE: 比较基于缓冲区大小的行数与理论最大行数 */
+    uVar4 = (long)param_4 / (long)iVar1 & 0xffffffff; /* NOTE: 如果缓冲区限制更小，则使用缓冲区能容纳的行数 */
+  }
+  if (0 < (int)uVar4) {
+    iVar3 = param_2 + (int)uVar4; /* NOTE: 计算循环结束的扫描行索引 */
+    do {
+      uVar2 = gdev_prn_get_bits(param_1,param_2,param_3,0); /* NOTE: 获取指定扫描行的位数据 */
+      if ((int)uVar2 < 0) { /* NOTE: 检查获取操作是否出错（返回负值表示错误） */
+        return (ulong)uVar2; /* NOTE: 错误时提前返回错误码 */
+      }
+      param_3 = param_3 + (long)iVar1 * 4; /* NOTE: 移动目标缓冲区指针，假设每行数据跨度为 iVar1 * 4 字节 */
+      param_2 = param_2 + 1; /* NOTE: 递增源扫描行索引 */
+    } while (param_2 != iVar3); /* NOTE: 循环直到复制完所有指定的行 */
+  }
+  return uVar4; /* NOTE: 返回实际成功复制的扫描行数 */
+}"
